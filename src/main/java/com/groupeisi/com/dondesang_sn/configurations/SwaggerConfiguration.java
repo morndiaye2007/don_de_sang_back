@@ -13,7 +13,7 @@ public class SwaggerConfiguration {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("webgram-stage backend API")
+                        .title("Don de sang backend API")
                         .version("v1.0.0"));
     }
 }
