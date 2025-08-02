@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.io.Serializable;
@@ -25,5 +26,7 @@ public class HopitalDTO implements Serializable {
     private String nombrePoche;
     private String localisation;
     private String region;
+    private DemandeDTO demande;
+
 
 }

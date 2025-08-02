@@ -10,10 +10,10 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", uses = {DonMapper.class})
 public interface UtilisateurMapper extends EntityMapper<UtilisateurDTO, UtilisateurEntity> {
     @Override
-    @Mapping(source = "agentId", target = "agent.id")
+    @Mapping(source = "role_id", target = "role.id")
     UtilisateurEntity asEntity(UtilisateurDTO dto);
 
     @Override
-    @Mapping(source = "agent.id", target = "agentId")
+    @Mapping(source = "role.id", target = "role_id")
     UtilisateurDTO asDto(UtilisateurEntity entity);
 }

@@ -3,8 +3,11 @@ package com.groupeisi.com.dondesang_sn.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.groupeisi.com.dondesang_sn.entity.DemandeEntity;
+import com.groupeisi.com.dondesang_sn.entity.HopitalEntity;
 import com.groupeisi.com.dondesang_sn.entity.enums.StatutDemande;
 import com.groupeisi.com.dondesang_sn.entity.enums.TypeGroupeSanguin;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.io.Serializable;
@@ -26,6 +29,9 @@ public class DemandeDTO implements Serializable {
     private StatutDemande statutDemande;
     private TypeGroupeSanguin groupeSanguin;
     private double poche;
+    private HopitalDTO hopital;
+
+
 
 
 }

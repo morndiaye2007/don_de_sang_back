@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.groupeisi.com.dondesang_sn.entity.enums.StatusDon;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.io.Serializable;
@@ -25,4 +26,6 @@ public class DonDTO implements Serializable {
     private Date dateDon;
     private String nombrePoche;
     private StatusDon statutDon;
+    private DonneurDTO donneur;
+
 }

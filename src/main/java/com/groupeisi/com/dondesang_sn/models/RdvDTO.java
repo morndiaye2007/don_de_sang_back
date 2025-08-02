@@ -3,6 +3,7 @@ package com.groupeisi.com.dondesang_sn.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.groupeisi.com.dondesang_sn.entity.CentreCollecteEntity;
 import com.groupeisi.com.dondesang_sn.entity.enums.StatutRdv;
 
 import jakarta.persistence.EnumType;
@@ -31,5 +32,7 @@ public class RdvDTO implements Serializable {
     private LocalTime heureRdv;
     @Enumerated(EnumType.STRING)
     private StatutRdv statutRdv;
+    private CentreCollecteDTO centreCollecte;
+
 
 }

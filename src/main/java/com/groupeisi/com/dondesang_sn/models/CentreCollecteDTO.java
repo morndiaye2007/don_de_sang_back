@@ -3,6 +3,7 @@ package com.groupeisi.com.dondesang_sn.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.groupeisi.com.dondesang_sn.entity.StockSangEntity;
 import com.groupeisi.com.dondesang_sn.entity.enums.StatutCentre;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
@@ -27,4 +28,5 @@ public class CentreCollecteDTO implements Serializable {
     private Date localisation;
     private StatutCentre statutCentre;
     private String region;
+    private StockSangDTO stockSang;
 }

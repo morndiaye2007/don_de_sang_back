@@ -3,9 +3,11 @@ package com.groupeisi.com.dondesang_sn.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.groupeisi.com.dondesang_sn.entity.HopitalEntity;
 import com.groupeisi.com.dondesang_sn.entity.enums.TypeGroupeSanguin;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.io.Serializable;
@@ -29,6 +31,6 @@ public class StockSangDTO implements Serializable {
     private Date dateEntree;
     @Temporal(TemporalType.DATE)
     private Date datePeremption;
-
+    private HopitalDTO hopital;
 
 }
