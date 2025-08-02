@@ -1,8 +1,8 @@
 package com.groupeisi.com.dondesang_sn.controller;
 
-import com.groupeisi.com.dondesang_sn.models.DonDTO;
+import com.groupeisi.com.dondesang_sn.models.CampagneDTO;
 import com.groupeisi.com.dondesang_sn.models.Response;
-import com.groupeisi.com.dondesang_sn.services.DonService;
+import com.groupeisi.com.dondesang_sn.services.CampagneService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -20,16 +20,16 @@ import java.util.Map;
 @CrossOrigin("*")
 public class CampagneController {
 
-    private final DonService donService;
+    private final CampagneService campagneService;
 
-    @Operation(summary = "Create don", description = "this endpoint takes input don and saves it")
+    @Operation(summary = "Create campagnes", description = "this endpoint takes input campagnes and saves it")
     @ApiResponses(value = {@ApiResponse(responseCode = "201", description = "Success"), @ApiResponse(responseCode = "400", description = "Request sent by the client was syntactically incorrect"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Response<Object> createDon(@RequestBody DonDTO donDTO) {
+    public Response<Object> createCampagne(@RequestBody CampagneDTO campagneDTO) {
         try {
-            var dto = donService.createDon(donDTO);
-            return Response.ok().setPayload(dto).setMessage("don créé");
+            var dto = campagneService.createCampagne(campagneDTO);
+            return Response.ok().setPayload(dto).setMessage("campagnes créé");
         } catch (Exception ex) {
             return Response.badRequest().setMessage(ex.getMessage());
         }
@@ -37,25 +37,25 @@ public class CampagneController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Response<Object> updateDon(@Parameter(name = "id", description = "the don id to updated") @PathVariable("id") Long id, @RequestBody DonDTO donDTO) {
-        donDTO.setId(id);
+    public Response<Object> updateCampagne(@Parameter(name = "id", description = "the campagnes id to updated") @PathVariable("id") Long id, @RequestBody CampagneDTO campagneDTO) {
+        campagneDTO.setId(id);
         try {
-            var dto = donService.updateDon(donDTO);
-            return Response.ok().setPayload(dto).setMessage("don modifié");
+            var dto = campagneService.updateCampagne(campagneDTO);
+            return Response.ok().setPayload(dto).setMessage("campagnes modifié");
         } catch (Exception ex) {
             return Response.badRequest().setMessage(ex.getMessage());
         }
 
     }
 
-    @Operation(summary = "Read the don", description = "This endpoint is used to read don, it takes input id don")
+    @Operation(summary = "Read the campagnes", description = "This endpoint is used to read campagnes, it takes input id campagnes")
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "400", description = "Request sent by the client was syntactically incorrect"), @ApiResponse(responseCode = "404", description = "Resource access does not exist"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Response<Object> getDon(@Parameter(name = "id", description = "the type don id to valid") @PathVariable Long id) {
+    public Response<Object> getCampagne(@Parameter(name = "id", description = "the type campagnes id to valid") @PathVariable Long id) {
         try {
-            var dto = donService.getDon(id);
-            return Response.ok().setPayload(dto).setMessage("don trouvé");
+            var dto = campagneService.getCampagne(id);
+            return Response.ok().setPayload(dto).setMessage("campagnes trouvé");
         } catch (Exception ex) {
             return Response.badRequest().setMessage(ex.getMessage());
         }
@@ -65,20 +65,20 @@ public class CampagneController {
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    public Response<Object> getAllDons(@RequestParam Map<String, String> searchParams, Pageable pageable) {
-        var page = donService.getAllDons(searchParams, pageable);
+    public Response<Object> getAllCampagnes(@RequestParam Map<String, String> searchParams, Pageable pageable) {
+        var page = campagneService.getAllCampagnes(searchParams, pageable);
         Response.PageMetadata metadata = Response.PageMetadata.builder().number(page.getNumber()).totalElements(page.getTotalElements()).size(page.getSize()).totalPages(page.getTotalPages()).build();
         return Response.ok().setPayload(page.getContent()).setMetadata(metadata);
     }
 
 
-    @Operation(summary = "don the agent", description = "Delete don, it takes input id don")
+    @Operation(summary = "create the campagnes", description = "Delete campagnes, it takes input id campagnes")
     @ApiResponses(value = {@ApiResponse(responseCode = "204", description = "No content"), @ApiResponse(responseCode = "400", description = "Request sent by the client was syntactically incorrect"), @ApiResponse(responseCode = "404", description = "Resource access does not exist"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAgent(@PathVariable("id") Long id) {
+    public void deleteCampagne(@PathVariable("id") Long id) {
         try {
-            donService.deleteDon(id);
+            campagneService.deleteCampagne(id);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
