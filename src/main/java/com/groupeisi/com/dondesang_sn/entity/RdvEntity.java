@@ -28,5 +28,6 @@ public class RdvEntity implements Serializable {
     private StatutRdv statutRdv;
 
     @ManyToOne
-    private DonneurEntity departement;
+    @JoinColumn(name = "centreCollecte_id")
+    private CentreCollecteEntity centreCollecte;
 }

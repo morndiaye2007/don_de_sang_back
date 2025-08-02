@@ -28,7 +28,6 @@ public class CampagneEntity implements Serializable {
     private Date date_fin;
     private double objectif_quantite_ml;
 
-
     @ManyToOne
     @JoinColumn(name = "agent_id")
     private RdvEntity agent;

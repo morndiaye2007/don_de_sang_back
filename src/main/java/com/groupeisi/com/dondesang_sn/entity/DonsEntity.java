@@ -27,6 +27,6 @@ public class DonsEntity implements Serializable {
     private StatusDon statutDon;
 
     @ManyToOne
-    @JoinColumn(name = "agent_id")
-    private RdvEntity agent;
+    @JoinColumn(name = "donneur_id")
+    private DonneurEntity donneur;
 }

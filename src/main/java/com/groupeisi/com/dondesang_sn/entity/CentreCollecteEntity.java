@@ -32,6 +32,6 @@ public class CentreCollecteEntity implements Serializable {
     private StatutCentre statutCentre;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "agent_id")
-    private RdvEntity agent;
+    @JoinColumn(name = "stockSang_id")
+    private StockSangEntity stockSang;
 }

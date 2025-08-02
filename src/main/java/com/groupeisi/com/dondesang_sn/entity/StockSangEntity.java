@@ -31,4 +31,8 @@ public class StockSangEntity implements Serializable {
     @Column(name = "date_peremption")
     private Date datePeremption;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hopital_id", nullable = true)
+    private HopitalEntity hopital;
+
 }

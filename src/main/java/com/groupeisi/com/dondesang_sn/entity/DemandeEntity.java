@@ -35,6 +35,6 @@ public class DemandeEntity implements Serializable {
     private TypeGroupeSanguin groupeSanguin;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "agent_id", nullable = true)
-    private RdvEntity agent;
+    @JoinColumn(name = "hopital_id", nullable = true)
+    private HopitalEntity hopital;
 }

@@ -31,6 +31,6 @@ public class HopitalEntity implements Serializable{
         private String region;
 
         @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "agent_id")
-        private RdvEntity agent;
+        @JoinColumn(name = "demande_id")
+        private DemandeEntity demande;
 }

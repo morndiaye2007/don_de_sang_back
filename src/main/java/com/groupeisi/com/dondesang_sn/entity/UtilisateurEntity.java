@@ -24,9 +24,8 @@ public class UtilisateurEntity implements Serializable {
     private String prenom;
     @Column(name = "mot_de_passe")
     private String mdp;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role_utilisateur")
-    private RoleUtilisateur roleUtilisateur;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id", nullable = true)
+    private RoleEntity roleEntity;
 
 }
