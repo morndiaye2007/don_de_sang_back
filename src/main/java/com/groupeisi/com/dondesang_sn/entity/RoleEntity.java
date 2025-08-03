@@ -20,7 +20,5 @@ public class RoleEntity implements Serializable {
     @Column(name = "nom_role")
     private String nom_role;
 
-    @ManyToOne
-    @JoinColumn(name = "agent_id")
-    private RdvEntity agent;
+
 }

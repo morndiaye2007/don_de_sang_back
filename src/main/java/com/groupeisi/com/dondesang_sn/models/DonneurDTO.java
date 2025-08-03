@@ -7,6 +7,7 @@ import com.groupeisi.com.dondesang_sn.entity.enums.SexType;
 import com.groupeisi.com.dondesang_sn.entity.enums.TypeGroupeSanguin;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.io.Serializable;

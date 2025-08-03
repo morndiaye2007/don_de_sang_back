@@ -39,13 +39,12 @@ public class DonneurEntity implements Serializable {
     private String addresse;
     @Column(name = "donneur_mdp")
     private String mdp;
-
     @Column(name = "date_dernier_don")
     @Temporal(TemporalType.DATE)
     private Date dateDernierDon;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "don_id", nullable = true)
+    private DonsEntity dons;
 
-    @OneToMany(mappedBy = "departement")
-
-    private List<RdvEntity> agents;
 }
