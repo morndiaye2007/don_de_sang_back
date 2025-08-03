@@ -1,8 +1,6 @@
 package com.groupeisi.com.dondesang_sn.mapper;
-
 import com.groupeisi.com.dondesang_sn.entity.UtilisateurEntity;
 import com.groupeisi.com.dondesang_sn.models.UtilisateurDTO;
-
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
