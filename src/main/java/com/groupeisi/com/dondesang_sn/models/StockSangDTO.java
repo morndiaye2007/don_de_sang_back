@@ -32,5 +32,6 @@ public class StockSangDTO implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date datePeremption;
     private HopitalDTO hopital;
+    private Long hopitalId;
 
 }

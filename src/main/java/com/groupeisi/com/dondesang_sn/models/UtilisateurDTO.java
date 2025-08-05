@@ -32,6 +32,6 @@ public class UtilisateurDTO implements Serializable {
     @Enumerated(EnumType.STRING)
     private RoleUtilisateur roleUtilisateur;
     private RoleDTO roleEntity;
-
+    private Long roleId;
 
 }

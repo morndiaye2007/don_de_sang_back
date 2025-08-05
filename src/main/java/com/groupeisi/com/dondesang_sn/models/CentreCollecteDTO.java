@@ -29,4 +29,6 @@ public class CentreCollecteDTO implements Serializable {
     private StatutCentre statutCentre;
     private String region;
     private StockSangDTO stockSang;
+    private Long stockSangId;
+
 }

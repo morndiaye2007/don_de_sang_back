@@ -8,6 +8,7 @@ import com.groupeisi.com.dondesang_sn.entity.enums.StatutRdv;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.io.Serializable;
@@ -27,12 +28,14 @@ public class RdvDTO implements Serializable {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
+    @NotEmpty
 
     private Date dateRdv;
     private LocalTime heureRdv;
     @Enumerated(EnumType.STRING)
     private StatutRdv statutRdv;
     private CentreCollecteDTO centreCollecte;
+    private Long centreCollecteId;
 
 
 }

@@ -27,6 +27,7 @@ public class HopitalDTO implements Serializable {
     private String localisation;
     private String region;
     private DemandeDTO demande;
+    private Long demandeId;
 
 
 }

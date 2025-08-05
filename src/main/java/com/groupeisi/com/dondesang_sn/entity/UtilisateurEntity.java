@@ -26,5 +26,5 @@ public class UtilisateurEntity implements Serializable {
     private String mdp;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", nullable = true)
-    private RoleEntity roleEntity;
+    private RoleEntity role;
 }

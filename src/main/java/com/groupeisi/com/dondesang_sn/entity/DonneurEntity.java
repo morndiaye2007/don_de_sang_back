@@ -43,8 +43,6 @@ public class DonneurEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dateDernierDon;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "don_id", nullable = true)
-    private DonsEntity dons;
+
 
 }

@@ -27,5 +27,6 @@ public class DonDTO implements Serializable {
     private String nombrePoche;
     private StatusDon statutDon;
     private DonneurDTO donneur;
+    private Long donneurId;
 
 }

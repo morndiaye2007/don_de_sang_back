@@ -26,17 +26,13 @@ public class DonneurDTO implements Serializable {
 
     private String nom;
     private String prenom;
-
     private SexType sexe;
-
     private TypeGroupeSanguin groupeSanguin;
     @Temporal(TemporalType.DATE)
     private Date dni;
-
     private String telephone;
     private String addresse;
     private String mdp;
-
     @Temporal(TemporalType.DATE)
     private Date dateDernierDon;
 }

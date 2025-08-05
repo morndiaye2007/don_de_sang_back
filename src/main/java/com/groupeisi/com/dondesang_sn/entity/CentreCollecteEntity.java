@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -34,4 +35,7 @@ public class CentreCollecteEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stockSang_id")
     private StockSangEntity stockSang;
+
+    @OneToMany(mappedBy = "centre", cascade = CascadeType.ALL)
+    private List<CampagneEntity> campagnes;
 }

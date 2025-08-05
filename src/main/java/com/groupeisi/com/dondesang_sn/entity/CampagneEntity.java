@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -28,7 +29,6 @@ public class CampagneEntity implements Serializable {
     private Date date_fin;
     private double objectif_quantite_ml;
 
-    @ManyToOne
-    @JoinColumn(name = "agent_id")
-    private RdvEntity agent;
+    @OneToMany(mappedBy = "campagne", cascade = CascadeType.ALL)
+    private List<RdvEntity> rendezVousList;
 }

@@ -30,6 +30,7 @@ public class DemandeDTO implements Serializable {
     private TypeGroupeSanguin groupeSanguin;
     private double poche;
     private HopitalDTO hopital;
+    private Long hopitalId;
 
 
 
