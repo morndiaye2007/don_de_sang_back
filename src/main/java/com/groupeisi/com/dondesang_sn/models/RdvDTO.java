@@ -36,6 +36,10 @@ public class RdvDTO implements Serializable {
     private StatutRdv statutRdv;
     private CentreCollecteDTO centreCollecte;
     private Long centreCollecteId;
+    private CampagneDTO campagne;
+    private Long campagneId;
+    private DonneurDTO donneur;
+    private Long donneurId;
 
 
 }

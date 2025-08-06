@@ -33,5 +33,7 @@ public class StockSangDTO implements Serializable {
     private Date datePeremption;
     private HopitalDTO hopital;
     private Long hopitalId;
+    private CentreCollecteDTO centreCollecte;
+    private Long centreCollecteId;
 
 }

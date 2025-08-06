@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -26,8 +27,6 @@ public class CNTSEntity implements Serializable {
     @Column(name = "email")
     private String email;
 
-
-    @ManyToOne
-    @JoinColumn(name = "agent_id")
-    private RdvEntity agent;
+     @OneToMany(mappedBy = "cnts")
+     private List<CentreCollecteEntity> centres;
 }

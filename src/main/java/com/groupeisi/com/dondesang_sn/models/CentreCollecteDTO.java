@@ -30,5 +30,7 @@ public class CentreCollecteDTO implements Serializable {
     private String region;
     private StockSangDTO stockSang;
     private Long stockSangId;
+    private CampagneDTO campagne;
+    private Long campagneId;
 
 }

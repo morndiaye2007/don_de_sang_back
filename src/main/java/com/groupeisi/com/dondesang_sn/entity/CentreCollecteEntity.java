@@ -36,7 +36,16 @@ public class CentreCollecteEntity implements Serializable {
     @JoinColumn(name = "stockSang_id")
     private StockSangEntity stockSang;
 
-    @OneToMany(mappedBy = "centre", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "lieuCollectePrincipal", cascade = CascadeType.ALL)
     private List<CampagneEntity> campagnes;
+    @OneToMany(mappedBy = "centre")
+    private List<DonsEntity> dons;
+
+    @OneToMany(mappedBy = "centre")
+    private List<RdvEntity> rendezVous;
+
+    @OneToMany(mappedBy = "centre")
+    private List<DemandeEntity> demande;
+
 
 }

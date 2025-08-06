@@ -31,6 +31,8 @@ public class DemandeDTO implements Serializable {
     private double poche;
     private HopitalDTO hopital;
     private Long hopitalId;
+    private StockSangDTO stockSang;
+    private Long stockSangId;
 
 
 

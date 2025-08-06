@@ -28,5 +28,7 @@ public class DonDTO implements Serializable {
     private StatusDon statutDon;
     private DonneurDTO donneur;
     private Long donneurId;
+    private CampagneDTO campagne;
+    private Long campagneId;
 
 }

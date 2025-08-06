@@ -28,4 +28,10 @@ public class CampagneDTO implements Serializable {
     private Date date_debut;
     private Date date_fin;
     private double objectif_quantite_ml;
+    private CentreCollecteDTO centreCollecte;
+    private Long centreCollecteId;
+    private DonneurDTO dons;
+    private Long donnneurId;
+    private RdvDTO rdv;
+    private Long rdvId;
 }

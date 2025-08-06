@@ -27,7 +27,7 @@ public class CampagneEntity implements Serializable {
     private Date date_debut;
     @Column(name = "date_fin")
     private Date date_fin;
-    private double objectif_quantite_ml;
+    private double nbre_de_poche;
 
     @OneToMany(mappedBy = "campagne", cascade = CascadeType.ALL)
     private List<RdvEntity> rendezVousList;

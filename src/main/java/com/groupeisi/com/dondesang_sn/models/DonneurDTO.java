@@ -35,4 +35,8 @@ public class DonneurDTO implements Serializable {
     private String mdp;
     @Temporal(TemporalType.DATE)
     private Date dateDernierDon;
+    private DonDTO don;
+    private Long donId;
+    private RdvDTO rdv;
+    private Long rdvId;
 }
