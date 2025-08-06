@@ -37,4 +37,5 @@ public class RdvEntity implements Serializable {
     @JoinColumn(name = "campagne_id")
     private CampagneEntity campagne;
 
+
 }

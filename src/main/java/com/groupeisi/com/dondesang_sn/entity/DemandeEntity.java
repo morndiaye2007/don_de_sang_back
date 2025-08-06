@@ -37,4 +37,10 @@ public class DemandeEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hopital_id", nullable = true)
     private HopitalEntity hopital;
+
+
+    @ManyToOne
+    @JoinColumn(name = "stock_id")
+    private StockSangEntity stockSang;
+
 }

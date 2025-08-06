@@ -38,4 +38,5 @@ public class CentreCollecteEntity implements Serializable {
 
     @OneToMany(mappedBy = "centre", cascade = CascadeType.ALL)
     private List<CampagneEntity> campagnes;
+
 }

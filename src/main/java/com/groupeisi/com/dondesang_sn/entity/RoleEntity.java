@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -19,6 +20,9 @@ public class RoleEntity implements Serializable {
     private Long id;
     @Column(name = "nom_role")
     private String nom_role;
+
+    @OneToMany(mappedBy = "role")
+    private List<UtilisateurEntity> utilisateurs;
 
 
 }

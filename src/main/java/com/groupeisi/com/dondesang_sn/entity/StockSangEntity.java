@@ -35,4 +35,9 @@ public class StockSangEntity implements Serializable {
     @JoinColumn(name = "hopital_id", nullable = true)
     private HopitalEntity hopital;
 
+    @ManyToOne
+    @JoinColumn(name = "centre_id")
+    private CentreCollecteEntity centre;
+
+
 }

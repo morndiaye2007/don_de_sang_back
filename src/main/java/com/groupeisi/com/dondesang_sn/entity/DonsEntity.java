@@ -29,4 +29,9 @@ public class DonsEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "donneur_id")
     private DonneurEntity donneur;
+
+    @ManyToOne
+    @JoinColumn(name = "campagne_id")
+    private CampagneEntity campagne;
+
 }
