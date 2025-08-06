@@ -37,7 +37,7 @@ public class StockSangEntity implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "centre_id")
-    private CentreCollecteEntity centre;
+    private CentreCollecteEntity centreCollecte;
 
 
 }

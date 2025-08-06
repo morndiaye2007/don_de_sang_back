@@ -23,6 +23,4 @@ public class RoleEntity implements Serializable {
 
     @OneToMany(mappedBy = "role")
     private List<UtilisateurEntity> utilisateurs;
-
-
 }

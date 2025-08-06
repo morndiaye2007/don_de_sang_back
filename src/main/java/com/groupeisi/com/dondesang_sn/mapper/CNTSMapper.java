@@ -11,10 +11,10 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface CNTSMapper extends EntityMapper<CNTSDTO, CNTSEntity> {
     @Override
-    @Mapping(source = "agentId", target = "agent.id")
+    @Mapping(source = "centrecollecteId", target = "centrecollecte.id")
     CNTSEntity asEntity(CNTSDTO dto);
 
     @Override
-    @Mapping(source = "agent.id", target = "agentId")
+    @Mapping(source = "centrecollecte.id", target = "centrecollecteId")
     CNTSDTO asDto(CNTSEntity entity);
 }

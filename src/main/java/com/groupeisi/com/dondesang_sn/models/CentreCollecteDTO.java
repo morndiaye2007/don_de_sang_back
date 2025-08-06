@@ -32,5 +32,11 @@ public class CentreCollecteDTO implements Serializable {
     private Long stockSangId;
     private CampagneDTO campagne;
     private Long campagneId;
+    private RdvDTO rdv;
+    private Long rdvId;
+    private DonDTO don;
+    private Long donId;
+    private DemandeDTO demande;
+    private Long demandeId;
 
 }

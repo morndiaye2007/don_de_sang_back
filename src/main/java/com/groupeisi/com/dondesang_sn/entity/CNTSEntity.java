@@ -28,5 +28,5 @@ public class CNTSEntity implements Serializable {
     private String email;
 
      @OneToMany(mappedBy = "cnts")
-     private List<CentreCollecteEntity> centres;
+     private List<CentreCollecteEntity> centrecollecte;
 }

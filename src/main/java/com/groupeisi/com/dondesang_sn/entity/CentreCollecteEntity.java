@@ -42,7 +42,7 @@ public class CentreCollecteEntity implements Serializable {
     private List<DonsEntity> dons;
 
     @OneToMany(mappedBy = "centre")
-    private List<RdvEntity> rendezVous;
+    private List<RdvEntity> rdv;
 
     @OneToMany(mappedBy = "centre")
     private List<DemandeEntity> demande;

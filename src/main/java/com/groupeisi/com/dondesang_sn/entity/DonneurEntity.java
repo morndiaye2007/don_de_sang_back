@@ -44,7 +44,7 @@ public class DonneurEntity implements Serializable {
     private Date dateDernierDon;
 
     @OneToMany(mappedBy = "donneur", cascade = CascadeType.ALL)
-    private List<RdvEntity> rendezVousList;
+    private List<RdvEntity> rdv;
 
     @OneToMany(mappedBy = "donneur", cascade = CascadeType.ALL)
     private List<DonsEntity> dons;

@@ -10,10 +10,10 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE,componentModel = "spring",uses = DonMapper.class)
 public interface HopitalMapper extends EntityMapper<HopitalDTO, HopitalEntity> {
     @Override
-    @Mapping(source = "demande.id",target = "demande_id")
+    @Mapping(source = "demande.id",target = "demandeId")
     HopitalDTO asDto(HopitalEntity entity);
 
     @Override
-    @Mapping(source = "demande_id",target = "demande.id")
+    @Mapping(source = "demandeId",target = "demande.id")
     HopitalEntity asEntity(HopitalDTO dto);
 }
