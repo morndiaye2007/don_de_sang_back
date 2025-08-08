@@ -5,7 +5,7 @@ import com.groupeisi.com.dondesang_sn.models.CentreCollecteDTO;
 import com.groupeisi.com.dondesang_sn.repository.CentreCollecteRepository;
 import com.groupeisi.com.dondesang_sn.services.CentreCollecteService;
 import com.querydsl.core.BooleanBuilder;
-//import com.groupeisi.com.dondesang_sn.entity.QCentreCollecteEntity;
+import com.groupeisi.com.dondesang_sn.entity.QCentreCollecteEntity;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -66,7 +66,7 @@ public class CentreCollecteServiceImpl implements CentreCollecteService {
     }
     private void buildSearch(Map<String, String> searchParams, BooleanBuilder booleanBuilder) {
         if (Objects.nonNull(searchParams)) {
-            var qEntity = QCentreCollecteEntity.centreCollectetEntity;
+            var qEntity = QCentreCollecteEntity.centreCollecteEntity;
             if (searchParams.containsKey("nom"))
                 booleanBuilder.and(qEntity.nom.containsIgnoreCase(searchParams.get("nom")));
             if (searchParams.containsKey("telephone"))

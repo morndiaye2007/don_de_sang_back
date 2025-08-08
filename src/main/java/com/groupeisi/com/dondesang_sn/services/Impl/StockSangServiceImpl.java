@@ -1,5 +1,6 @@
 package com.groupeisi.com.dondesang_sn.services.Impl;
 
+import com.groupeisi.com.dondesang_sn.entity.QStockSangEntity;
 import com.groupeisi.com.dondesang_sn.mapper.StockSangMapper;
 import com.groupeisi.com.dondesang_sn.models.StockSangDTO;
 import com.groupeisi.com.dondesang_sn.repository.StockSangRepository;
@@ -69,14 +70,14 @@ public class StockSangServiceImpl implements StockSangService {
     private void buildSearch(Map<String, String> searchParams, BooleanBuilder booleanBuilder) {
         if (Objects.nonNull(searchParams)) {
             var qEntity = QStockSangEntity.stockSangEntity;
-            if (searchParams.containsKey("date_entree")) {
+            if (searchParams.containsKey("dateEntree")) {
                 Date date = null;
                 try {
-                    date = new SimpleDateFormat("yyyy-MM-dd").parse(searchParams.get("date_entree"));
+                    date = new SimpleDateFormat("yyyy-MM-dd").parse(searchParams.get("dateEntree"));
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
-                booleanBuilder.and(qEntity.date_entree.eq(date));
+                booleanBuilder.and(qEntity.dateEntree.eq(date));
             }
             if (searchParams.containsKey("datePeremption")) {
                 Date date = null;

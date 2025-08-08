@@ -3,6 +3,7 @@ package com.groupeisi.com.dondesang_sn.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.groupeisi.com.dondesang_sn.entity.CampagneEntity;
 import com.groupeisi.com.dondesang_sn.entity.enums.SexType;
 import com.groupeisi.com.dondesang_sn.entity.enums.TypeGroupeSanguin;
 
@@ -35,8 +36,8 @@ public class DonneurDTO implements Serializable {
     private String mdp;
     @Temporal(TemporalType.DATE)
     private Date dateDernierDon;
-    private DonDTO don;
-    private Long donId;
-    private RdvDTO rdv;
-    private Long rdvId;
+    private CampagneDTO campagne;
+    private Long campagneId;
+    private CentreCollecteDTO centreCollecte;
+    private Long centreCollecteId;
 }

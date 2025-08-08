@@ -9,22 +9,16 @@ import org.mapstruct.ReportingPolicy;
 
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", uses = {DonMapper.class})
-public interface CentreCollecteMapper extends EntityMapper<CentreCollecteDTO, CentreCollecteEntity> {
+public abstract class CentreCollecteMapper implements EntityMapper<CentreCollecteDTO, CentreCollecteEntity> {
     @Override
-    @Mapping(source = "stockSangId", target = "stockSang.id")
-    @Mapping(source = "campagneId", target = "campagnes.id")
-    @Mapping(source = "donId", target = "dons.id")
-    @Mapping(source = "rdvId", target = "rdv.id")
-    @Mapping(source = "demandeId", target = "demande.id")
+    @Mapping(source = "cntsId", target = "cnts.id")
+    @Mapping(source = "hopitalId", target = "hopital.id")
 
-    CentreCollecteEntity asEntity(CentreCollecteDTO dto);
+  public abstract CentreCollecteEntity asEntity(CentreCollecteDTO dto);
 
     @Override
-    @Mapping(source = "stockSang.id", target = "stockSangId")
-    @Mapping(source = "campagnes.id", target = "campagneId")
-    @Mapping(source = "dons.id", target = "donId")
-    @Mapping(source = "rdv.id", target = "rdvId")
-    @Mapping(source = "demande.id", target = "demandeId")
+    @Mapping(source = "cnts.id", target = "cntsId")
+    @Mapping(source = "hopital.id", target = "hopitalId")
 
-    CentreCollecteDTO asDto(CentreCollecteEntity entity);
+    public abstract CentreCollecteDTO asDto(CentreCollecteEntity entity);
 }

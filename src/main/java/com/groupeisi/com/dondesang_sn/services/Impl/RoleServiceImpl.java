@@ -7,6 +7,8 @@ import com.groupeisi.com.dondesang_sn.models.RoleDTO;
 import com.groupeisi.com.dondesang_sn.repository.CampagneRepository;
 import com.groupeisi.com.dondesang_sn.repository.RoleRepository;
 import com.groupeisi.com.dondesang_sn.services.CampagneService;
+import com.groupeisi.com.dondesang_sn.entity.QRoleEntity;
+
 import com.groupeisi.com.dondesang_sn.services.RoleService;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -34,7 +36,7 @@ public class RoleServiceImpl implements RoleService {
 
     private void buildSearch(Map<String, String> searchParams, BooleanBuilder booleanBuilder) {
         if (Objects.nonNull(searchParams)) {
-            var qEntity = QRoleEntity.RoleEntity;
+            var qEntity = QRoleEntity.roleEntity;
             if (searchParams.containsKey("nom_role"))
                 booleanBuilder.and(qEntity.nom_role.containsIgnoreCase(searchParams.get("nom_role")));
 

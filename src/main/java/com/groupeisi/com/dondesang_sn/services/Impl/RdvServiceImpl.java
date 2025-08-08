@@ -1,7 +1,7 @@
 package com.groupeisi.com.dondesang_sn.services.Impl;
 
+import com.groupeisi.com.dondesang_sn.entity.QRdvEntity;
 import com.groupeisi.com.dondesang_sn.mapper.RdvMapper;
-
 import com.groupeisi.com.dondesang_sn.models.RdvDTO;
 import com.groupeisi.com.dondesang_sn.repository.RdvRepository;
 import com.groupeisi.com.dondesang_sn.services.RdvService;
@@ -69,11 +69,7 @@ public class RdvServiceImpl implements RdvService {
     private void buildSearch(Map<String, String> searchParams, BooleanBuilder booleanBuilder) {
         if (Objects.nonNull(searchParams)) {
             var qEntity = QRdvEntity.rdvEntity;
-            if (searchParams.containsKey("name"))
-                booleanBuilder.and(qEntity.name.containsIgnoreCase(searchParams.get("name")));
-            if (searchParams.containsKey("lastName"))
-                booleanBuilder.and(qEntity.lastName.containsIgnoreCase(searchParams.get("lastName")));
-            if (searchParams.containsKey("dni")){
+            if (searchParams.containsKey("dateRdv")){
                 Date date = null;
                 try {
                     date = new SimpleDateFormat("yyyy-MM-dd").parse(searchParams.get("dateRdv"));

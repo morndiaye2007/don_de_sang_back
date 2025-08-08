@@ -12,5 +12,4 @@ public interface DemandeService {
     void deleteDemande(Long id);
     DemandeDTO getDemande(Long id);
     Page<DemandeDTO> getAllDemandes(Map<String, String> searchParams, Pageable pageable);
-    Page<DemandeDTO> getAllContratsAgent(Map<String, String> searchParams, Pageable pageable, Long idAgent);
 }

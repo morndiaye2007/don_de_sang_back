@@ -1,5 +1,6 @@
 package com.groupeisi.com.dondesang_sn.services.Impl;
 
+import com.groupeisi.com.dondesang_sn.entity.QUtilisateurEntity;
 import com.groupeisi.com.dondesang_sn.mapper.UtilisateurMapper;
 import com.groupeisi.com.dondesang_sn.models.UtilisateurDTO;
 import com.groupeisi.com.dondesang_sn.repository.UtilisateurRepository;

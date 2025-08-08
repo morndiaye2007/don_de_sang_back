@@ -7,7 +7,7 @@ import com.groupeisi.com.dondesang_sn.repository.DonRepository;
 import com.groupeisi.com.dondesang_sn.services.DonService;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
-//import com.groupeisi.com.dondesang_sn.entity.QDonEntity;
+import com.groupeisi.com.dondesang_sn.entity.QDonsEntity;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -69,9 +69,7 @@ public class DonServiceImpl implements DonService {
 
     private void buildSearch(Map<String, String> searchParams, BooleanBuilder booleanBuilder) {
         if (Objects.nonNull(searchParams)) {
-            var qEntity = QDonEntity.donEntity;
-            if (searchParams.containsKey("titre"))
-                booleanBuilder.and(qEntity.titre.containsIgnoreCase(searchParams.get("titre")));
+            var qEntity = QDonsEntity.donsEntity;
 
             if (searchParams.containsKey("dateDon")){
                 Date date = null;

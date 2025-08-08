@@ -43,15 +43,15 @@ public class DonneurEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dateDernierDon;
 
-    @OneToMany(mappedBy = "donneur", cascade = CascadeType.ALL)
-    private List<RdvEntity> rdv;
+    @ManyToOne
+    @JoinColumn(name = "campagne_id")
+    private CampagneEntity campagne;
 
-    @OneToMany(mappedBy = "donneur", cascade = CascadeType.ALL)
-    private List<DonsEntity> dons;
+    @ManyToOne
+    @JoinColumn(name = "centre_id")
+    private CentreCollecteEntity centreCollecte;
 
 //    @OneToOne(mappedBy = "donneur", cascade = CascadeType.ALL)
 //    private Historique historique;
-
-
 
 }

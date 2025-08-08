@@ -1,13 +1,11 @@
 package com.groupeisi.com.dondesang_sn.services.Impl;
 
 import com.groupeisi.com.dondesang_sn.mapper.CNTSMapper;
-import com.groupeisi.com.dondesang_sn.mapper.CampagneMapper;
 import com.groupeisi.com.dondesang_sn.models.CNTSDTO;
-import com.groupeisi.com.dondesang_sn.models.CampagneDTO;
 import com.groupeisi.com.dondesang_sn.repository.CNTSRepository;
-import com.groupeisi.com.dondesang_sn.repository.CampagneRepository;
 import com.groupeisi.com.dondesang_sn.services.CNTSService;
-import com.groupeisi.com.dondesang_sn.services.CampagneService;
+import com.groupeisi.com.dondesang_sn.entity.QCNTSEntity;
+
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +20,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
-
+@Service
 @Transactional
 @RequiredArgsConstructor
 public class CNTSServiceImpl implements CNTSService {
@@ -33,14 +31,14 @@ public class CNTSServiceImpl implements CNTSService {
 
     private void buildSearch(Map<String, String> searchParams, BooleanBuilder booleanBuilder) {
         if (Objects.nonNull(searchParams)) {
-            var qEntity = QCNTSEntity.CntsEntity;
+            var qEntity = QCNTSEntity.cNTSEntity;
 
-            if (searchParams.containsKey("nom"))
-                booleanBuilder.and(qEntity.nom.containsIgnoreCase(searchParams.get("nom")));
-            if (searchParams.containsKey("prenom"))
-                booleanBuilder.and(qEntity.prenom.containsIgnoreCase(searchParams.get("prenom")));
-            if (searchParams.containsKey("mdp"))
-                booleanBuilder.and(qEntity.mdp.containsIgnoreCase(searchParams.get("mdp")));
+            if (searchParams.containsKey("nom_cnts"))
+                booleanBuilder.and(qEntity.nom_cnts.containsIgnoreCase(searchParams.get("nom")));
+            if (searchParams.containsKey("adresse"))
+                booleanBuilder.and(qEntity.adresse.containsIgnoreCase(searchParams.get("prenom")));
+            if (searchParams.containsKey("telephone"))
+                booleanBuilder.and(qEntity.telephone.containsIgnoreCase(searchParams.get("mdp")));
 
         }
     }

@@ -25,7 +25,7 @@ public class CentreCollecteEntity implements Serializable {
     private String telephone;
     @Column(name = "localisation_centre")
     private String localisation;
-    @Enumerated(EnumType.STRING)
+
     @Column(name = "region_centre")
     private String region;
     @Enumerated(EnumType.STRING)
@@ -35,17 +35,10 @@ public class CentreCollecteEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stockSang_id")
     private StockSangEntity stockSang;
-
-    @OneToMany(mappedBy = "lieuCollectePrincipal", cascade = CascadeType.ALL)
-    private List<CampagneEntity> campagnes;
-    @OneToMany(mappedBy = "centre")
-    private List<DonsEntity> dons;
-
-    @OneToMany(mappedBy = "centre")
-    private List<RdvEntity> rdv;
-
-    @OneToMany(mappedBy = "centre")
-    private List<DemandeEntity> demande;
-
+    @ManyToOne
+    @JoinColumn(name = "hopital_id")
+    private HopitalEntity hopital;
+    @ManyToOne
+    private CNTSEntity cnts;
 
 }

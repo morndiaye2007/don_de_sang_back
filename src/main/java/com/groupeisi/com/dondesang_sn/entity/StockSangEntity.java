@@ -20,7 +20,7 @@ public class StockSangEntity implements Serializable {
     private Long id;
 
     @Column(name = "nombre_de_poche")
-    private double nombreDeEpoche;
+    private double nombreDepoche;
     @Enumerated(EnumType.STRING)
     @Column(name = "groupe_sanguin")
     private TypeGroupeSanguin groupeSanguin;
@@ -38,6 +38,10 @@ public class StockSangEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "centre_id")
     private CentreCollecteEntity centreCollecte;
+
+
+    @ManyToOne
+    private CNTSEntity cnts;
 
 
 }

@@ -1,11 +1,11 @@
 package com.groupeisi.com.dondesang_sn.services.Impl;
 
+import com.groupeisi.com.dondesang_sn.entity.QDonneurEntity;
 import com.groupeisi.com.dondesang_sn.mapper.DonneurMapper;
 import com.groupeisi.com.dondesang_sn.models.DonneurDTO;
 import com.groupeisi.com.dondesang_sn.repository.DonneurRepository;
 import com.groupeisi.com.dondesang_sn.services.DonneurService;
 import com.querydsl.core.BooleanBuilder;
-//import com.groupeisi.com.dondesang_sn.entity.QDonneurEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -76,11 +76,11 @@ public class DonneurServiceImpl implements DonneurService {
             if (searchParams.containsKey("dni")){
                 Date date = null;
                 try {
-                    date = new SimpleDateFormat("yyyy-MM-dd").parse(searchParams.get("donneur_dni"));
+                    date = new SimpleDateFormat("yyyy-MM-dd").parse(searchParams.get("dni"));
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
-                booleanBuilder.and(qEntity.donneur_dni.eq(date));
+                booleanBuilder.and(qEntity.dni.eq(date));
             }
 
         }

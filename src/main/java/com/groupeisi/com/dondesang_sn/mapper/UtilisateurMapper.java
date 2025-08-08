@@ -6,12 +6,14 @@ import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", uses = {DonMapper.class})
-public interface UtilisateurMapper extends EntityMapper<UtilisateurDTO, UtilisateurEntity> {
+public abstract class UtilisateurMapper implements EntityMapper<UtilisateurDTO, UtilisateurEntity> {
     @Override
     @Mapping(source = "roleId", target = "role.id")
-    UtilisateurEntity asEntity(UtilisateurDTO dto);
+
+    public abstract UtilisateurEntity asEntity(UtilisateurDTO dto);
 
     @Override
     @Mapping(source = "role.id", target = "roleId")
-    UtilisateurDTO asDto(UtilisateurEntity entity);
+
+    public abstract UtilisateurDTO asDto(UtilisateurEntity entity);
 }

@@ -5,7 +5,7 @@ import com.groupeisi.com.dondesang_sn.models.DemandeDTO;
 import com.groupeisi.com.dondesang_sn.repository.DemandeRepository;
 import com.groupeisi.com.dondesang_sn.services.DemandeService;
 import com.querydsl.core.BooleanBuilder;
-//import com.groupeisi.com.dondesang_sn.entity.QDemandeEntity;
+import com.groupeisi.com.dondesang_sn.entity.QDemandeEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -53,16 +53,6 @@ public class DemandeServiceImpl implements DemandeService {
     @Override
     public Page<DemandeDTO> getAllDemandes(Map<String, String> searchParams, Pageable pageable) {
         var booleanBuilder = new BooleanBuilder();
-        buildSearch(searchParams, booleanBuilder);
-        return demandeRepository.findAll(booleanBuilder, pageable)
-                .map(demandeMapper::asDto);
-    }
-
-    @Override
-    public Page<DemandeDTO> getAllContratsAgent(Map<String, String> searchParams, Pageable pageable, Long idAgent) {
-        var booleanBuilder = new BooleanBuilder();
-        var qContrat = QContratEntity.contratEntity;
-        booleanBuilder.and(qContrat.agent.id.eq(idAgent));
         buildSearch(searchParams, booleanBuilder);
         return demandeRepository.findAll(booleanBuilder, pageable)
                 .map(demandeMapper::asDto);

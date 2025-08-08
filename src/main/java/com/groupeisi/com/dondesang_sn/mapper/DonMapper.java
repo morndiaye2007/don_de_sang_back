@@ -7,16 +7,17 @@ import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
-public interface DonMapper extends EntityMapper<DonDTO, DonsEntity> {
+public abstract class DonMapper implements EntityMapper<DonDTO, DonsEntity> {
     @Override
-    @org.mapstruct.Mapping(source = "donneurId", target = "donneur.id")
-    @org.mapstruct.Mapping(source = "campagneId", target = "campagne.id")
+    @Mapping(source = "campagneId", target = "campagne.id")
+    @Mapping(source = "donneurId", target = "donneur.id")
 
-    DonsEntity asEntity(DonDTO dto);
+    public abstract DonsEntity asEntity(DonDTO dto);
 
     @Override
-    @Mapping(source = "donneur.id", target = "donneurId")
     @Mapping(source = "campagne.id", target = "campagneId")
+    @Mapping(source = "donneur.id", target = "donneurId")
 
-    DonDTO asDto(DonsEntity entity);
+
+    public abstract DonDTO asDto(DonsEntity entity);
 }

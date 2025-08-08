@@ -24,7 +24,7 @@ public class StockSangDTO implements Serializable {
     private Long id;
     @NotEmpty
 
-    private double nombreDeEpoche;
+    private double nombreDepoche;
     @Enumerated(EnumType.STRING)
     private TypeGroupeSanguin groupeSanguin;
     @Temporal(TemporalType.DATE)
@@ -35,5 +35,7 @@ public class StockSangDTO implements Serializable {
     private Long hopitalId;
     private CentreCollecteDTO centreCollecte;
     private Long centreCollecteId;
+    private CNTSDTO cnts;
+    private Long cntsId;
 
 }

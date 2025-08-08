@@ -3,6 +3,8 @@ import com.groupeisi.com.dondesang_sn.mapper.CampagneMapper;
 import com.groupeisi.com.dondesang_sn.models.CampagneDTO;
 import com.groupeisi.com.dondesang_sn.repository.CampagneRepository;
 import com.groupeisi.com.dondesang_sn.services.CampagneService;
+import com.groupeisi.com.dondesang_sn.entity.QCampagneEntity;
+
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +30,7 @@ public class CampagneServiceImpl implements CampagneService {
 
     private void buildSearch(Map<String, String> searchParams, BooleanBuilder booleanBuilder) {
         if (Objects.nonNull(searchParams)) {
-            var qEntity = QCampagneEntity.CampagneEntity;
+            var qEntity = QCampagneEntity.campagneEntity;
             if (searchParams.containsKey("nom_campagne"))
                 booleanBuilder.and(qEntity.nom_campagne.containsIgnoreCase(searchParams.get("nom_campagne")));
 

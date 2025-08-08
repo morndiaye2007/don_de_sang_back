@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "campagne")
+@Table(name = "cnts")
 @Entity
 public class CNTSEntity implements Serializable {
     @Id
@@ -26,7 +26,9 @@ public class CNTSEntity implements Serializable {
     private String telephone;
     @Column(name = "email")
     private String email;
+    @ManyToOne
+    @JoinColumn(name = "centre_id")
+    private CentreCollecteEntity centreCollecte;
 
-     @OneToMany(mappedBy = "cnts")
-     private List<CentreCollecteEntity> centrecollecte;
+
 }

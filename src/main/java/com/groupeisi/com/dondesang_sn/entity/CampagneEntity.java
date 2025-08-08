@@ -29,13 +29,11 @@ public class CampagneEntity implements Serializable {
     private Date date_fin;
     private double nbre_de_poche;
 
-    @OneToMany(mappedBy = "campagne", cascade = CascadeType.ALL)
-    private List<RdvEntity> rdv;
-
     @ManyToOne
     @JoinColumn(name = "centre_id")
-    private CentreCollecteEntity centrecollecte;
+    private CentreCollecteEntity centreCollecte;
 
-    @OneToMany(mappedBy = "campagne", cascade = CascadeType.ALL)
-    private List<DonneurEntity> donnneur;
+    @ManyToOne
+    private CNTSEntity cnts;
+
 }

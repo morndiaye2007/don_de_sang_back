@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public interface EntityMapper<D, E> {
 
@@ -13,25 +14,27 @@ public interface EntityMapper<D, E> {
 
     D asDto(E entity);
 
-    List<D> parse(List<E> entities);
-
-    List<E> parseToEntity(List<D> entities);
-
-    default Page<D> asPage(Page<E> entityPage, List<E> content) {
-        Pageable pageable = entityPage.getPageable();
-        List<D> dtoList = parse(content);
-        return new PageImpl<>(dtoList, pageable, entityPage.getTotalElements());
+    // Méthodes par défaut pour transformer des listes
+    default List<D> asDtoList(List<E> entityList) {
+        return entityList == null ? null :
+                entityList.stream().map(this::asDto).collect(Collectors.toList());
     }
 
+    default List<E> asEntityList(List<D> dtoList) {
+        return dtoList == null ? null :
+                dtoList.stream().map(this::asEntity).collect(Collectors.toList());
+    }
+
+    // Méthodes pour transformer des pages
     default Page<D> asPage(Page<E> entityPage) {
         Pageable pageable = entityPage.getPageable();
-        List<D> dtoList = parse(entityPage.getContent());
+        List<D> dtoList = asDtoList(entityPage.getContent());
         return new PageImpl<>(dtoList, pageable, entityPage.getTotalElements());
     }
 
-    default  Page<D> asPage(List<E> entities, int page, int size) {
+    default Page<D> asPage(List<E> entities, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        List<D> dtoList = parse(entities);
+        List<D> dtoList = asDtoList(entities);
         return new PageImpl<>(dtoList, pageable, entities.size());
     }
 }

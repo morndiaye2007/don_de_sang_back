@@ -1,5 +1,6 @@
 package com.groupeisi.com.dondesang_sn.services.Impl;
 
+import com.groupeisi.com.dondesang_sn.entity.QHopitalEntity;
 import com.groupeisi.com.dondesang_sn.mapper.HopitalMapper;
 
 import com.groupeisi.com.dondesang_sn.models.HopitalDTO;
@@ -75,7 +76,7 @@ public class HopitalServiceImpl implements HopitalService {
 
             String region = searchParams.get("region");
             if (region != null && !region.isEmpty()) {
-                booleanBuilder.and(qEntity.region.stringValue().lower().containsIgnoreCase(sexe.toLowerCase()));
+                booleanBuilder.and(qEntity.region.stringValue().lower().containsIgnoreCase(region.toLowerCase()));
             }
 
         }

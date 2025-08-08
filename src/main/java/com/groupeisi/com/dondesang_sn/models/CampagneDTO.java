@@ -3,6 +3,7 @@ package com.groupeisi.com.dondesang_sn.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.groupeisi.com.dondesang_sn.entity.CNTSEntity;
 import com.groupeisi.com.dondesang_sn.entity.enums.StatusDon;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
@@ -30,8 +31,7 @@ public class CampagneDTO implements Serializable {
     private double objectif_quantite_ml;
     private CentreCollecteDTO centreCollecte;
     private Long centreCollecteId;
-    private DonneurDTO dons;
-    private Long donnneurId;
-    private RdvDTO rdv;
-    private Long rdvId;
+
+    private CNTSDTO cnts;
+    private Long cntsId;
 }
