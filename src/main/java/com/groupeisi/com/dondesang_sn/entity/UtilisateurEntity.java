@@ -22,6 +22,8 @@ public class UtilisateurEntity implements Serializable {
     private String nom;
     @Column(name = "utilisateur_prenom")
     private String prenom;
+    @Column(name = "email", unique = true)
+    private String email;
     @Column(name = "mot_de_passe")
     private String mdp;
     @ManyToOne(fetch = FetchType.LAZY)

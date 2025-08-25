@@ -3,6 +3,7 @@ package com.groupeisi.com.dondesang_sn.services.Impl;
 import com.groupeisi.com.dondesang_sn.entity.QDonneurEntity;
 import com.groupeisi.com.dondesang_sn.mapper.DonneurMapper;
 import com.groupeisi.com.dondesang_sn.models.DonneurDTO;
+import com.groupeisi.com.dondesang_sn.models.Response;
 import com.groupeisi.com.dondesang_sn.repository.DonneurRepository;
 import com.groupeisi.com.dondesang_sn.services.DonneurService;
 import com.querydsl.core.BooleanBuilder;
@@ -83,6 +84,34 @@ public class DonneurServiceImpl implements DonneurService {
                 booleanBuilder.and(qEntity.dni.eq(date));
             }
 
+        }
+    }
+
+    @Override
+    public Response<Object> authenticateDonneur(String telephone, String motDePasse) {
+        try {
+            // Rechercher le donneur par téléphone
+            var donneur = donneurRepository.findByTelephone(telephone);
+            
+            if (donneur.isEmpty()) {
+                return Response.badRequest().setMessage("Numéro de téléphone non trouvé");
+            }
+            
+            var donneurEntity = donneur.get();
+            
+            // Vérifier le mot de passe
+            if (!Objects.equals(donneurEntity.getMdp(), motDePasse)) {
+                return Response.badRequest().setMessage("Mot de passe incorrect");
+            }
+            
+            // Retourner les données du donneur connecté
+            return Response.ok().setPayload(Map.of(
+                "donneur", donneurMapper.asDto(donneurEntity),
+                "token", "donneur_" + donneurEntity.getId()
+            )).setMessage("Connexion réussie");
+            
+        } catch (Exception e) {
+            return Response.badRequest().setMessage("Erreur lors de la connexion: " + e.getMessage());
         }
     }
 

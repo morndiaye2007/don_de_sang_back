@@ -1,6 +1,7 @@
 package com.groupeisi.com.dondesang_sn.services;
 
 import com.groupeisi.com.dondesang_sn.models.DonneurDTO;
+import com.groupeisi.com.dondesang_sn.models.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,4 +15,5 @@ public interface DonneurService {
     void deleteDonneur(Long id);
     DonneurDTO getDonneur(Long id);
      Page<DonneurDTO> getAllDonneurs(Map<String, String> searchParams, Pageable pageable);
+     Response<Object> authenticateDonneur(String telephone, String motDePasse);
 }

@@ -16,7 +16,8 @@ public enum StatutRdv {
 
     EN_ATTENTE("Demande en attente"),
     VALIDEE("Demande validee"),
-    ANNULEE("Demande annule");
+    REFUSEE("Demande refusee"),
+    ANNULEE("Demande annulee");
 
     @Getter
     @Setter

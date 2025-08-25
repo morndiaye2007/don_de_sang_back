@@ -1,9 +1,12 @@
 package com.groupeisi.com.dondesang_sn.services.Impl;
 
-import com.groupeisi.com.dondesang_sn.entity.QRdvEntity;
+//import com.groupeisi.com.dondesang_sn.entity.QRdvEntity;
 import com.groupeisi.com.dondesang_sn.mapper.RdvMapper;
 import com.groupeisi.com.dondesang_sn.models.RdvDTO;
 import com.groupeisi.com.dondesang_sn.repository.RdvRepository;
+import com.groupeisi.com.dondesang_sn.repository.CampagneRepository;
+import com.groupeisi.com.dondesang_sn.repository.CentreCollecteRepository;
+import com.groupeisi.com.dondesang_sn.repository.DonneurRepository;
 import com.groupeisi.com.dondesang_sn.services.RdvService;
 import com.querydsl.core.BooleanBuilder;
 
@@ -20,6 +23,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,10 +33,33 @@ public class RdvServiceImpl implements RdvService {
 
     private final RdvRepository rdvRepository;
     private final RdvMapper rdvMapper;
+    private final CampagneRepository campagneRepository;
+    private final CentreCollecteRepository centreCollecteRepository;
+    private final DonneurRepository donneurRepository;
 
     @Override
     public RdvDTO createRdv(RdvDTO rdvDTO) {
         var entity = rdvMapper.asEntity(rdvDTO);
+        
+        // Récupérer les entités complètes si les IDs sont fournis
+        if (rdvDTO.getCampagneId() != null) {
+            var campagne = campagneRepository.findById(rdvDTO.getCampagneId())
+                .orElseThrow(() -> new RuntimeException("Campagne non trouvée avec l'ID: " + rdvDTO.getCampagneId()));
+            entity.setCampagne(campagne);
+        }
+        
+        if (rdvDTO.getCentreCollecteId() != null) {
+            var centre = centreCollecteRepository.findById(rdvDTO.getCentreCollecteId())
+                .orElseThrow(() -> new RuntimeException("Centre de collecte non trouvé avec l'ID: " + rdvDTO.getCentreCollecteId()));
+            entity.setCentreCollecte(centre);
+        }
+        
+        if (rdvDTO.getDonneurId() != null) {
+            var donneur = donneurRepository.findById(rdvDTO.getDonneurId())
+                .orElseThrow(() -> new RuntimeException("Donneur non trouvé avec l'ID: " + rdvDTO.getDonneurId()));
+            entity.setDonneur(donneur);
+        }
+        
         var entitySave = rdvRepository.save(entity);
         return rdvMapper.asDto(entitySave);
     }
@@ -61,30 +88,13 @@ public class RdvServiceImpl implements RdvService {
 
     @Override
     public Page<RdvDTO> getAllRdvs(Map<String, String> searchParams, Pageable pageable) {
-        var booleanBuilder = new BooleanBuilder();
-        buildSearch(searchParams, booleanBuilder);
-        return rdvRepository.findAll(booleanBuilder, pageable)
-                .map(rdvMapper::asDto);
-    }
-    private void buildSearch(Map<String, String> searchParams, BooleanBuilder booleanBuilder) {
-        if (Objects.nonNull(searchParams)) {
-            var qEntity = QRdvEntity.rdvEntity;
-            if (searchParams.containsKey("dateRdv")){
-                Date date = null;
-                try {
-                    date = new SimpleDateFormat("yyyy-MM-dd").parse(searchParams.get("dateRdv"));
-                } catch (ParseException e) {
-                    throw new RuntimeException(e);
-                }
-                booleanBuilder.and(qEntity.dateRdv.eq(date));
-            }
-            String statutRdv = searchParams.get("statutRdv");
-            if (statutRdv != null && !statutRdv.isEmpty()) {
-                booleanBuilder.and(qEntity.statutRdv.stringValue().lower().containsIgnoreCase(statutRdv.toLowerCase()));
-            }
-
-        }
+        var page = rdvRepository.findAll(pageable);
+        return page.map(rdvMapper::asDto);
     }
 
-
+    @Override
+    public List<RdvDTO> getRdvsByDonneur(Long donneurId) {
+        var rdvs = rdvRepository.findByDonneurId(donneurId);
+        return rdvs.stream().map(rdvMapper::asDto).collect(Collectors.toList());
+    }
 }

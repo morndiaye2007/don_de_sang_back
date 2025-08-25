@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 import static java.util.Arrays.stream;
 
 public enum RoleUtilisateur {
-    AGENT("Masculin"),
-    MEDECIN("Féminin"),
-    ADMIN("Féminin");
+    AGENT("Agent"),
+    MEDECIN("Medecin"),
+    ADMIN("Admin");
 
 
     @Getter

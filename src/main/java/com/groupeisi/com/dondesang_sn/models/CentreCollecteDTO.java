@@ -31,11 +31,11 @@ public class CentreCollecteDTO implements Serializable {
     private String localisation;
     private StatutCentre statutCentre;
     private String region;
-    private StockSangDTO stockSang;
+   // private StockSangDTO stockSang;
     private Long stockSangId;
-   private CNTSDTO cnts;
+  // private CNTSDTO cnts;
    private Long cntsId;
-   private HopitalDTO hopital;
+  // private HopitalDTO hopital;
    private Long hopitalId;
 
 }

@@ -28,6 +28,7 @@ public class UtilisateurDTO implements Serializable {
     @NotEmpty
     private String nom;
     private String prenom;
+    private String email;
     private String mdp;
     @Enumerated(EnumType.STRING)
     private RoleUtilisateur roleUtilisateur;

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("rdv")
+@RequestMapping("/rdv")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class RdvController {
@@ -68,6 +68,17 @@ public class RdvController {
         var page = rdvService.getAllRdvs(searchParams, pageable);
         Response.PageMetadata metadata = Response.PageMetadata.builder().number(page.getNumber()).totalElements(page.getTotalElements()).size(page.getSize()).totalPages(page.getTotalPages()).build();
         return Response.ok().setPayload(page.getContent()).setMetadata(metadata);
+    }
+
+    @GetMapping("/donneur/{donneurId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Response<Object> getRdvsByDonneur(@PathVariable Long donneurId) {
+        try {
+            var rdvs = rdvService.getRdvsByDonneur(donneurId);
+            return Response.ok().setPayload(rdvs).setMessage("RDV du donneur trouvés");
+        } catch (Exception ex) {
+            return Response.badRequest().setMessage(ex.getMessage());
+        }
     }
 
 

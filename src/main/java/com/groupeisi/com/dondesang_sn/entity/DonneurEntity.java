@@ -39,16 +39,16 @@ public class DonneurEntity implements Serializable {
     private String addresse;
     @Column(name = "donneur_mdp")
     private String mdp;
-    @Column(name = "date_dernier_don")
+    @Column(name = "date_dernier_don", nullable = true)
     @Temporal(TemporalType.DATE)
     private Date dateDernierDon;
 
     @ManyToOne
-    @JoinColumn(name = "campagne_id")
+    @JoinColumn(name = "campagne_id", nullable = true)
     private CampagneEntity campagne;
 
     @ManyToOne
-    @JoinColumn(name = "centre_id")
+    @JoinColumn(name = "centre_id", nullable = true)
     private CentreCollecteEntity centreCollecte;
 
 //    @OneToOne(mappedBy = "donneur", cascade = CascadeType.ALL)

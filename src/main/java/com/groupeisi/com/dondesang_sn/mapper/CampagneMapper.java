@@ -9,13 +9,13 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public abstract class CampagneMapper implements EntityMapper<CampagneDTO, CampagneEntity> {
     @Override
-    @Mapping(source = "cntsId", target = "cnts.id")
-
+    @Mapping(source = "centreCollecteId", target = "centreCollecte.id")
+    @Mapping(target = "cnts", ignore = true)
     public abstract CampagneEntity asEntity(CampagneDTO dto);
 
     @Override
+    @Mapping(source = "centreCollecte.id", target = "centreCollecteId")
     @Mapping(source = "cnts.id", target = "cntsId")
-
     public abstract CampagneDTO asDto(CampagneEntity entity);
 
 }

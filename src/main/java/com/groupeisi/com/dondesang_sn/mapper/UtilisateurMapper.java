@@ -9,11 +9,13 @@ import org.mapstruct.ReportingPolicy;
 public abstract class UtilisateurMapper implements EntityMapper<UtilisateurDTO, UtilisateurEntity> {
     @Override
     @Mapping(source = "roleId", target = "role.id")
+    @Mapping(source = "email", target = "email")
 
     public abstract UtilisateurEntity asEntity(UtilisateurDTO dto);
 
     @Override
     @Mapping(source = "role.id", target = "roleId")
+    @Mapping(source = "email", target = "email")
 
     public abstract UtilisateurDTO asDto(UtilisateurEntity entity);
 }

@@ -19,6 +19,6 @@ public interface RdvService {
 
     Page<RdvDTO> getAllRdvs(Map<String, String> searchParams, Pageable pageable);
 
-
+    List<RdvDTO> getRdvsByDonneur(Long donneurId);
 
 }

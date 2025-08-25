@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("campagnes")
+@RequestMapping("/campagnes")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class CampagneController {
@@ -28,9 +28,25 @@ public class CampagneController {
     @ResponseStatus(HttpStatus.CREATED)
     public Response<Object> createCampagne(@RequestBody CampagneDTO campagneDTO) {
         try {
+            System.out.println("=== CRÉATION CAMPAGNE - DONNÉES REÇUES ===");
+            System.out.println("CampagneDTO: " + campagneDTO.toString());
+            System.out.println("Nom campagne: " + campagneDTO.getNom_campagne());
+            System.out.println("Description: " + campagneDTO.getDescription());
+            System.out.println("Date début: " + campagneDTO.getDate_debut());
+            System.out.println("Date fin: " + campagneDTO.getDate_fin());
+            System.out.println("Nombre de poches: " + campagneDTO.getNbre_de_poche());
+            System.out.println("Centre collecte ID: " + campagneDTO.getCentreCollecteId());
+            System.out.println("CNTS ID: " + campagneDTO.getCntsId());
+            
             var dto = campagneService.createCampagne(campagneDTO);
+            
+            System.out.println("=== CAMPAGNE CRÉÉE AVEC SUCCÈS ===");
+            System.out.println("ID généré: " + dto.getId());
             return Response.ok().setPayload(dto).setMessage("campagnes créé");
         } catch (Exception ex) {
+            System.out.println("=== ERREUR CRÉATION CAMPAGNE ===");
+            System.out.println("Erreur: " + ex.getMessage());
+            ex.printStackTrace();
             return Response.badRequest().setMessage(ex.getMessage());
         }
     }

@@ -31,11 +31,11 @@ public class StockSangDTO implements Serializable {
     private Date dateEntree;
     @Temporal(TemporalType.DATE)
     private Date datePeremption;
-    private HopitalDTO hopital;
+   // private HopitalDTO hopital;
     private Long hopitalId;
-    private CentreCollecteDTO centreCollecte;
+   // private CentreCollecteDTO centreCollecte;
     private Long centreCollecteId;
-    private CNTSDTO cnts;
+   // private CNTSDTO cnts;
     private Long cntsId;
 
 }

@@ -73,6 +73,17 @@ public class CampagneServiceImpl implements CampagneService {
     @Override
     public CampagneDTO createCampagne(CampagneDTO campagneDTO) {
         var entity = campagneMapper.asEntity(campagneDTO);
+        
+        // Gérer la relation avec CentreCollecte si l'ID est fourni
+        if (campagneDTO.getCentreCollecteId() != null) {
+            var centreCollecte = new com.groupeisi.com.dondesang_sn.entity.CentreCollecteEntity();
+            centreCollecte.setId(campagneDTO.getCentreCollecteId());
+            entity.setCentreCollecte(centreCollecte);
+        }
+        
+        // Ne pas définir CNTS pour éviter l'erreur TransientObjectException
+        entity.setCnts(null);
+        
         var entitySave = campagneRepository.save(entity);
         return campagneMapper.asDto(entitySave);
     }

@@ -24,11 +24,11 @@ public class DonDTO implements Serializable {
     private Long id;
     @NotEmpty
     private Date dateDon;
-    private String nombrePoche;
+    private double nombrePoche;
     private StatusDon statutDon;
-    private DonneurDTO donneur;
+   // private DonneurDTO donneur;
     private Long donneurId;
-    private CampagneDTO campagne;
+   // private CampagneDTO campagne;
     private Long campagneId;
 
 }

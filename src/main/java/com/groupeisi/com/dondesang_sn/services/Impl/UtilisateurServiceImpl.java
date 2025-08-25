@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,10 +25,14 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     private final UtilisateurRepository utilisateurRepository;
     private final UtilisateurMapper utilisateurMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UtilisateurDTO createUtilisateur(UtilisateurDTO utilisateurDTO) {
         var entity = utilisateurMapper.asEntity(utilisateurDTO);
+        if (entity.getMdp() != null && !entity.getMdp().isBlank()) {
+            entity.setMdp(passwordEncoder.encode(entity.getMdp()));
+        }
         var entitySave = utilisateurRepository.save(entity);
         return utilisateurMapper.asDto(entitySave);
     }
@@ -35,6 +40,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public UtilisateurDTO updateUtilisateur(UtilisateurDTO utilisateurDTO)  {
         var entityUpdate = utilisateurMapper.asEntity(utilisateurDTO);
+        if (utilisateurDTO.getMdp() != null && !utilisateurDTO.getMdp().isBlank()) {
+            entityUpdate.setMdp(passwordEncoder.encode(utilisateurDTO.getMdp()));
+        } else {
+            // conserver l'ancien mot de passe si non fourni
+            utilisateurRepository.findById(utilisateurDTO.getId()).ifPresent(old -> entityUpdate.setMdp(old.getMdp()));
+        }
         var updatedEntity = utilisateurRepository.save(entityUpdate);
         return utilisateurMapper.asDto(updatedEntity);
     }

@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 import static java.util.Arrays.stream;
 
 public enum StatutCentre {
-    ACTIF("Demande en attente"),
-    INACTIF("Demande validee");
+    INACTIF("Centre inactif"),
+    ACTIF("Centre actif");
 
     @Getter
     @Setter

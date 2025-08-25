@@ -17,8 +17,8 @@ public abstract class RdvMapper implements EntityMapper<RdvDTO, RdvEntity> {
     public abstract RdvDTO asDto(RdvEntity entity);
 
     @Override
-    @Mapping(source = "campagneId", target = "campagne.id")
-    @Mapping(source = "centreCollecteId", target = "centreCollecte.id")
-    @Mapping(source = "donneurId", target = "donneur.id")
+    @Mapping(target = "campagne", ignore = true)
+    @Mapping(target = "centreCollecte", ignore = true)
+    @Mapping(target = "donneur", ignore = true)
     public abstract RdvEntity asEntity(RdvDTO dto);
 }

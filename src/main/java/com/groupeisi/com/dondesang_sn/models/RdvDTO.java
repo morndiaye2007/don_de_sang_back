@@ -34,11 +34,11 @@ public class RdvDTO implements Serializable {
     private LocalTime heureRdv;
     @Enumerated(EnumType.STRING)
     private StatutRdv statutRdv;
-    private CentreCollecteDTO centreCollecte;
+   // private CentreCollecteDTO centreCollecte;
     private Long centreCollecteId;
-    private CampagneDTO campagne;
+  //  private CampagneDTO campagne;
     private Long campagneId;
-    private DonneurDTO donneur;
+ //   private DonneurDTO donneur;
     private Long donneurId;
 
 

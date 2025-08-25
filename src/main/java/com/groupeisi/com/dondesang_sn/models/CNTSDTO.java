@@ -27,6 +27,6 @@ public class CNTSDTO implements Serializable {
     private String telephone;
     private String email;
 
-    private CentreCollecteDTO centreCollecte;
+  //  private CentreCollecteDTO centreCollecte;
     private Long centreCollecteId;
 }

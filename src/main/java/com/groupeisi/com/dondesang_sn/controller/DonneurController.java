@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("donneurs")
+@RequestMapping("/donneurs")
 @RequiredArgsConstructor
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 
 public class DonneurController {
 
@@ -30,9 +30,27 @@ public class DonneurController {
     @ResponseStatus(HttpStatus.CREATED)
     public Response<Object> createDonneur(@RequestBody DonneurDTO donneurDTO) {
         try {
+            System.out.println("=== DONNÉES REÇUES PAR LE BACKEND ===");
+            System.out.println("DonneurDTO: " + donneurDTO.toString());
+            System.out.println("Nom: " + donneurDTO.getNom());
+            System.out.println("Prenom: " + donneurDTO.getPrenom());
+            System.out.println("Sexe: " + donneurDTO.getSexe());
+            System.out.println("GroupeSanguin: " + donneurDTO.getGroupeSanguin());
+            System.out.println("DNI: " + donneurDTO.getDni());
+            System.out.println("Telephone: " + donneurDTO.getTelephone());
+            System.out.println("Addresse: " + donneurDTO.getAddresse());
+            System.out.println("Mdp: " + donneurDTO.getMdp());
+            System.out.println("CampagneId: " + donneurDTO.getCampagneId());
+            System.out.println("CentreCollecteId: " + donneurDTO.getCentreCollecteId());
+            
             var dto = donneurService.createDonneur(donneurDTO);
+            System.out.println("=== DONNEUR CRÉÉ AVEC SUCCÈS ===");
+            System.out.println("ID généré: " + dto.getId());
             return Response.ok().setPayload(dto).setMessage("donneur créé");
         } catch (Exception ex) {
+            System.out.println("=== ERREUR LORS DE LA CRÉATION ===");
+            System.out.println("Erreur: " + ex.getMessage());
+            ex.printStackTrace();
             return Response.badRequest().setMessage(ex.getMessage());
         }
     }
@@ -83,6 +101,29 @@ public class DonneurController {
             donneurService.deleteDonneur(id);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @Operation(summary = "Login donneur", description = "Authenticate donneur with phone and password")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "401", description = "Invalid credentials"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
+    @PostMapping("/login")
+    @ResponseStatus(HttpStatus.OK)
+    public Response<Object> loginDonneur(@RequestBody Map<String, String> body) {
+        try {
+            String telephone = body.getOrDefault("telephone", "");
+            String motDePasse = body.getOrDefault("motDePasse", "");
+            
+            System.out.println("=== TENTATIVE DE CONNEXION DONNEUR ===");
+            System.out.println("Téléphone: " + telephone);
+            System.out.println("Mot de passe fourni: " + (motDePasse.isEmpty() ? "NON" : "OUI"));
+            
+            var result = donneurService.authenticateDonneur(telephone, motDePasse);
+            return result;
+        } catch (Exception ex) {
+            System.out.println("=== ERREUR CONNEXION DONNEUR ===");
+            System.out.println("Erreur: " + ex.getMessage());
+            ex.printStackTrace();
+            return Response.badRequest().setMessage("Erreur lors de la connexion: " + ex.getMessage());
         }
     }
 }

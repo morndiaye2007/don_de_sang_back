@@ -28,12 +28,12 @@ public class DemandeDTO implements Serializable {
     private Date dateDemande;
     private StatutDemande statutDemande;
     private TypeGroupeSanguin groupeSanguin;
-    private double poche;
-    private HopitalDTO hopital;
+    private double nombreDepoche;
+  //  private HopitalDTO hopital;
     private Long hopitalId;
-    private StockSangDTO stockSang;
+  //  private StockSangDTO stockSang;
     private Long stockSangId;
-    private CentreCollecteDTO centreCollecte;
+  //  private CentreCollecteDTO centreCollecte;
     private Long centreCollecteId;
 
 

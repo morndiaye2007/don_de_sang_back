@@ -25,10 +25,10 @@ public class HopitalDTO implements Serializable {
     @JsonIgnore
     @NotEmpty
     private String nom;
-    private String nombrePoche;
+    private double nombrePoche;
     private String localisation;
     private String region;
-    private DemandeDTO demande;
+ //   private DemandeDTO demande;
     private Long demandeId;
 
 

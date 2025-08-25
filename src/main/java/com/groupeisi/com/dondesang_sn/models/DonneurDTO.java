@@ -23,8 +23,6 @@ import java.util.Date;
 public class DonneurDTO implements Serializable {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
-    @NotEmpty
-
     private String nom;
     private String prenom;
     private SexType sexe;
@@ -36,8 +34,8 @@ public class DonneurDTO implements Serializable {
     private String mdp;
     @Temporal(TemporalType.DATE)
     private Date dateDernierDon;
-    private CampagneDTO campagne;
+  //  private CampagneDTO campagne;
     private Long campagneId;
-    private CentreCollecteDTO centreCollecte;
+  //  private CentreCollecteDTO centreCollecte;
     private Long centreCollecteId;
 }

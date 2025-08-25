@@ -1,7 +1,8 @@
 server:
   port: 2000
   servlet:
-    context-path: /api-webService
+    context-path: /api
+  address: 0.0.0.0
 
 spring:
   datasource:
@@ -20,10 +21,15 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   application:
     name: DonDeSang_sn
-  springdoc:
-    api-docs:
-      enabled: true
-      path: /v3/api-docs
-    swagger-ui:
-      enabled: true
-      path: /swagger-ui.html
+
+jwt:
+  secret: ${JWT_SECRET:ZmQ0ZGI5NjQ0MDQwY2I4MjMxNTI3Y2Q3ZmI3MjdhN2ZmZGRkZjBhY2E0NTY2YjFjNGQ3OTNkNmY0Y2NhZTBlZjlhNGY3ODg0ODg3Y2I4ZTcyZWVlOTVjMmQ0ODkyODJjNTVlMTA4YzAyODBkZjE5ZTRmY2Q0YzFiMmE0MjI=}
+  expirationMillis: ${JWT_EXPIRATION:3600000}
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html

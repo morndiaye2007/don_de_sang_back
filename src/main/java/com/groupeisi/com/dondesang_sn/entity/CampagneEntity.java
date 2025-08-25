@@ -1,5 +1,6 @@
 package com.groupeisi.com.dondesang_sn.entity;
 
+import com.groupeisi.com.dondesang_sn.entity.enums.StatusCampagne;
 import com.groupeisi.com.dondesang_sn.entity.enums.StatusDon;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,15 +21,21 @@ public class CampagneEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "nom_campagne")
-    private String nom_campagne    ;
+    private String nom_campagne;
     @Column(name = "description")
-    private String description     ;
+    private String description;
     @Column(name = "date_debut")
     private Date date_debut;
     @Column(name = "date_fin")
     private Date date_fin;
     private double nbre_de_poche;
-
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status_campagne")
+    private StatusCampagne statusCampagne;
+    
+    @Column(name = "objectif")
+    private Double objectif;
     @ManyToOne
     @JoinColumn(name = "centre_id")
     private CentreCollecteEntity centreCollecte;
