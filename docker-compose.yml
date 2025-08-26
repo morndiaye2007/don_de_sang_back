@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # Base de données PostgreSQL
+  postgres:
+    image: postgres:16
+    container_name: dondesang-postgres
+    environment:
+      POSTGRES_DB: dondesang_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - dondesang-network
+
+  # API Spring Boot
+  api:
+    build: .
+    container_name: dondesang-api
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/dondesang_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+    ports:
+      - "2000:2000"
+    depends_on:
+      - postgres
+    networks:
+      - dondesang-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  dondesang-network:
+    driver: bridge
