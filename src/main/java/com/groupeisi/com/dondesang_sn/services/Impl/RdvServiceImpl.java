@@ -93,8 +93,8 @@ public class RdvServiceImpl implements RdvService {
                 // Formater la date et l'heure
                 String dateFormatted = savedEntity.getDateRdv() != null ? 
                     new SimpleDateFormat("dd/MM/yyyy").format(savedEntity.getDateRdv()) : "Date non spécifiée";
-                String heureFormatted = savedEntity.getHeureRdv() != null ? 
-                    savedEntity.getHeureRdv() : "Heure non spécifiée";
+                String heureFormatted = savedEntity.getHeureRdv() != null ?
+                        savedEntity.getHeureRdv().toString() : "Heure non spécifiée";
                 
                 smsService.sendConfirmationSms(
                     donneur.getTelephone(),

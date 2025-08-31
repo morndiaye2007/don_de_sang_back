@@ -14,8 +14,8 @@ import static java.util.Arrays.stream;
 
 public enum StatusDon {
     ANNULE("Don en anulle"),
-    EN_ATTENTE("Contrat Resilier"),
-    TERMINE("Contrat Terminée");
+    EN_ATTENTE("don en  attente"),
+    EFFECTUE("don Efectuer");
 
 
 
