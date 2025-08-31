@@ -41,5 +41,7 @@ public class RdvDTO implements Serializable {
  //   private DonneurDTO donneur;
     private Long donneurId;
 
+    // Données du donneur pour l'affichage
+    private DonneurDTO donneur;
 
 }

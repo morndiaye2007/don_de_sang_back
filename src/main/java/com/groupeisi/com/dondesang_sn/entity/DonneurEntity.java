@@ -4,14 +4,16 @@ import com.groupeisi.com.dondesang_sn.entity.enums.SexType;
 import com.groupeisi.com.dondesang_sn.entity.enums.TypeGroupeSanguin;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -53,5 +55,8 @@ public class DonneurEntity implements Serializable {
 
 //    @OneToOne(mappedBy = "donneur", cascade = CascadeType.ALL)
 //    private Historique historique;
+
+    @OneToMany(mappedBy = "donneur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<RdvEntity> rendezvous;
 
 }

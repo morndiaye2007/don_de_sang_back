@@ -3,14 +3,16 @@ package com.groupeisi.com.dondesang_sn.entity;
 import com.groupeisi.com.dondesang_sn.entity.enums.StatutRdv;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "rendez_vous")
@@ -30,7 +32,7 @@ public class RdvEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "centreCollecte_id")
     private CentreCollecteEntity centreCollecte;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "donneur_id")
     private DonneurEntity donneur;
     @ManyToOne

@@ -18,9 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -97,5 +99,13 @@ public class DonServiceImpl implements DonService {
                 throw new RuntimeException("Erreur lors du parsing de la date pour la clé: " + key, e);
             }
         }
+    }
+
+    @Override
+    public List<DonDTO> getDonsByDonneur(Long donneurId) {
+        var dons = donRepository.findByDonneurId(donneurId);
+        return dons.stream()
+            .map(donMapper::asDto)
+            .collect(Collectors.toList());
     }
 }

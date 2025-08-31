@@ -16,6 +16,7 @@ public abstract class CampagneMapper implements EntityMapper<CampagneDTO, Campag
     @Override
     @Mapping(source = "centreCollecte.id", target = "centreCollecteId")
     @Mapping(source = "cnts.id", target = "cntsId")
+    @Mapping(source = "statusCampagne", target = "statusCampagne")
     public abstract CampagneDTO asDto(CampagneEntity entity);
 
 }

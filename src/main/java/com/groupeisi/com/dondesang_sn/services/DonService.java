@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -15,4 +16,5 @@ public interface DonService {
     void deleteDon(Long id);
     DonDTO getDon(Long id);
     Page<DonDTO> getAllDons(Map<String, String> searchParams, Pageable pageable);
+    List<DonDTO> getDonsByDonneur(Long donneurId);
 }

@@ -15,6 +15,7 @@ import static java.util.Arrays.stream;
 public enum RoleUtilisateur {
     AGENT("Agent"),
     MEDECIN("Medecin"),
+    MINISTERE("Ministère"),
     ADMIN("Admin");
 
 

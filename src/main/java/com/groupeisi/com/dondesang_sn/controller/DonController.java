@@ -3,6 +3,7 @@ package com.groupeisi.com.dondesang_sn.controller;
 import com.groupeisi.com.dondesang_sn.models.DonDTO;
 import com.groupeisi.com.dondesang_sn.models.Response;
 import com.groupeisi.com.dondesang_sn.services.DonService;
+import com.groupeisi.com.dondesang_sn.services.DonationEligibilityService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -22,6 +23,7 @@ import java.util.Map;
 public class DonController {
 
     private final DonService donService;
+    private final DonationEligibilityService donationEligibilityService;
 
     @Operation(summary = "Create don", description = "this endpoint takes input don and saves it")
     @ApiResponses(value = {@ApiResponse(responseCode = "201", description = "Success"), @ApiResponse(responseCode = "400", description = "Request sent by the client was syntactically incorrect"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
@@ -72,6 +74,36 @@ public class DonController {
         return Response.ok().setPayload(page.getContent()).setMetadata(metadata);
     }
 
+
+    @GetMapping("/donneur/{donneurId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Response<Object> getDonsByDonneur(@PathVariable Long donneurId) {
+        try {
+            var dons = donService.getDonsByDonneur(donneurId);
+            return Response.ok().setPayload(dons).setMessage("Dons du donneur trouvés");
+        } catch (Exception ex) {
+            return Response.badRequest().setMessage(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/eligibility/{donneurId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Response<Object> checkEligibility(@PathVariable Long donneurId) {
+        try {
+            boolean isEligible = donationEligibilityService.isEligibleForDonation(donneurId);
+            var nextEligibleDate = donationEligibilityService.getNextEligibleDate(donneurId);
+            
+            var result = Map.of(
+                "eligible", isEligible,
+                "nextEligibleDate", nextEligibleDate,
+                "message", isEligible ? "Éligible pour un don" : "Doit attendre avant le prochain don"
+            );
+            
+            return Response.ok().setPayload(result).setMessage("Vérification d'éligibilité effectuée");
+        } catch (Exception ex) {
+            return Response.badRequest().setMessage(ex.getMessage());
+        }
+    }
 
     @Operation(summary = "don the agent", description = "Delete don, it takes input id don")
     @ApiResponses(value = {@ApiResponse(responseCode = "204", description = "No content"), @ApiResponse(responseCode = "400", description = "Request sent by the client was syntactically incorrect"), @ApiResponse(responseCode = "404", description = "Resource access does not exist"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})

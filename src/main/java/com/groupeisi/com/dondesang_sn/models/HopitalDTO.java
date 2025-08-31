@@ -20,7 +20,6 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class HopitalDTO implements Serializable {
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
     @JsonIgnore
     @NotEmpty
