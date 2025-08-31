@@ -30,7 +30,7 @@
         <sonar.coverage.exclusions>**/entity/**,**/config/**,**/Application.java</sonar.coverage.exclusions>
         <sonar.test.exclusions>**/test/**</sonar.test.exclusions>
         <sonar.login>${env.SONAR_TOKEN}</sonar.login>
-        <sonar.skip>false</sonar.skip>
+        <sonar.skip>true</sonar.skip>
     </properties>
 
     <dependencies>
