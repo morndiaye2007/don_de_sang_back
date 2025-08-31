@@ -24,6 +24,11 @@
         <springdoc.version>2.1.0</springdoc.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <lombok.version>1.18.30</lombok.version>
+        <sonar.organization>morndiaye2007</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.projectKey>morndiaye2007_don_de_sang_backend</sonar.projectKey>
+        <sonar.coverage.exclusions>**/entity/**,**/config/**,**/Application.java</sonar.coverage.exclusions>
+        <sonar.test.exclusions>**/test/**</sonar.test.exclusions>
     </properties>
 
     <dependencies>
@@ -254,6 +259,34 @@
                         <include>**/*UnitTest.java</include>
                     </includes>
                 </configuration>
+            </plugin>
+            
+            <!-- SonarQube plugin -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.9.1.2184</version>
+            </plugin>
+            
+            <!-- JaCoCo plugin for code coverage -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.8</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
