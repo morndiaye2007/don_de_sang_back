@@ -54,10 +54,17 @@ pipeline {
           steps {
               echo 'Analyse du code avec SonarCloud...'
               withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
-                  bat "mvn -B verify sonar:sonar -Dsonar.login=%SONAR_TOKEN%"
+                  bat """
+                  mvn -B verify sonar:sonar ^
+                  -Dsonar.projectKey=don_de_sang_back ^
+                  -Dsonar.organization=morndiaye2007 ^
+                  -Dsonar.host.url=https://sonarcloud.io ^
+                  -Dsonar.login=%SONAR_TOKEN%
+                  """
               }
           }
       }
+
 
         
         stage('Docker Build') {
