@@ -60,6 +60,7 @@ pipeline {
                   -Dsonar.organization=morndiaye2007 ^
                   -Dsonar.host.url=https://sonarcloud.io ^
                   -Dsonar.login=%SONAR_TOKEN%
+                  -Dsonar.skip=false
                   """
               }
           }
