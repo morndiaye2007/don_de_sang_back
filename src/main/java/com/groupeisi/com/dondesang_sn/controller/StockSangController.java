@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ import java.util.Map;
 @RequestMapping("stockSang")
 @RequiredArgsConstructor
 @CrossOrigin("*")
-
+@Tag(name = "Stock Sang", description = "API pour la gestion du stock de sang")
 public class StockSangController {
 
     private final StockSangService stockSangService;
@@ -36,6 +37,8 @@ public class StockSangController {
         }
     }
 
+    @Operation(summary = "Update Stock sang", description = "Update an existing Stock sang")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "400", description = "Request sent by the client was syntactically incorrect"), @ApiResponse(responseCode = "404", description = "Resource not found"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Response<Object> updateStockSang(@Parameter(name = "id", description = "the Stock sang id to updated") @PathVariable("id") Long id, @RequestBody StockSangDTO stockSangDTO) {
@@ -62,7 +65,7 @@ public class StockSangController {
         }
     }
 
-    @Operation(summary = "Read all Budget", description = "It takes input param of the page and returns this list related")
+    @Operation(summary = "Get all StockSang", description = "Get all StockSang with pagination and search parameters")
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
@@ -73,8 +76,21 @@ public class StockSangController {
     }
 
 
-    @Operation(summary = "delete the Stock sang", description = "Delete Stock sang, it takes input id Stock sang")
-    @ApiResponses(value = {@ApiResponse(responseCode = "204", description = "No content"), @ApiResponse(responseCode = "400", description = "Request sent by the client was syntactically incorrect"), @ApiResponse(responseCode = "404", description = "Resource access does not exist"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
+    @Operation(summary = "Get stock statistics by blood group", description = "Get aggregated stock statistics grouped by blood type")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
+    @GetMapping("/statistiques/groupes-sanguins")
+    @ResponseStatus(HttpStatus.OK)
+    public Response<Object> getStockStatistiquesByGroupeSanguin() {
+        try {
+            var statistiques = stockSangService.getStockStatistiquesByGroupeSanguin();
+            return Response.ok().setPayload(statistiques).setMessage("Statistiques de stock par groupe sanguin récupérées");
+        } catch (Exception ex) {
+            return Response.badRequest().setMessage(ex.getMessage());
+        }
+    }
+
+    @Operation(summary = "Delete Stock sang", description = "Delete Stock sang, it takes input id Stock sang")
+    @ApiResponses(value = {@ApiResponse(responseCode = "204", description = "No content"), @ApiResponse(responseCode = "400", description = "Request sent by the client was syntactically incorrect"), @ApiResponse(responseCode = "404", description = "Resource not found"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteStockSang(@PathVariable("id") Long id) {

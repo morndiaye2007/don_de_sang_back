@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ import java.util.Map;
 @RequestMapping("/donneurs")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
-
+@Tag(name = "Donneur", description = "API pour la gestion des donneurs")
 public class DonneurController {
 
     private final DonneurService donneurService;
@@ -55,6 +56,8 @@ public class DonneurController {
         }
     }
 
+    @Operation(summary = "Update donneur", description = "Update an existing donneur")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "400", description = "Request sent by the client was syntactically incorrect"), @ApiResponse(responseCode = "404", description = "Resource not found"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Response<Object> updateDonneur(@Parameter(name = "id", description = "the donneur id to updated") @PathVariable("id") Long id, @RequestBody DonneurDTO donneurDTO) {
@@ -81,7 +84,7 @@ public class DonneurController {
         }
     }
 
-    @Operation(summary = "Read all Budget", description = "It takes input param of the page and returns this list related")
+    @Operation(summary = "Get all donneurs", description = "Get all donneurs with pagination and search parameters")
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
@@ -124,6 +127,24 @@ public class DonneurController {
             System.out.println("Erreur: " + ex.getMessage());
             ex.printStackTrace();
             return Response.badRequest().setMessage("Erreur lors de la connexion: " + ex.getMessage());
+        }
+    }
+
+    @Operation(summary = "Update FCM token", description = "Update Firebase Cloud Messaging token for push notifications")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "404", description = "Donneur not found"), @ApiResponse(responseCode = "500", description = "Internal server error")})
+    @PostMapping("/{id}/fcm-token")
+    @ResponseStatus(HttpStatus.OK)
+    public Response<Object> updateFcmToken(@PathVariable("id") Long id, @RequestBody Map<String, String> body) {
+        try {
+            String fcmToken = body.get("fcmToken");
+            if (fcmToken == null || fcmToken.trim().isEmpty()) {
+                return Response.badRequest().setMessage("Token FCM requis");
+            }
+            
+            donneurService.updateFcmToken(id, fcmToken);
+            return Response.ok().setMessage("Token FCM mis à jour avec succès");
+        } catch (Exception ex) {
+            return Response.badRequest().setMessage("Erreur lors de la mise à jour du token FCM: " + ex.getMessage());
         }
     }
 }

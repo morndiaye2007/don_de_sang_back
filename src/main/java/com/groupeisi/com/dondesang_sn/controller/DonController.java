@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import java.util.Map;
 @RequestMapping("dons")
 @RequiredArgsConstructor
 @CrossOrigin("*")
+@Tag(name = "Dons", description = "API pour la gestion des dons de sang")
 public class DonController {
 
     private final DonService donService;
@@ -38,6 +40,8 @@ public class DonController {
         }
     }
 
+    @Operation(summary = "Update don", description = "Update an existing don")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "400", description = "Request sent by the client was syntactically incorrect"), @ApiResponse(responseCode = "404", description = "Resource not found"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Response<Object> updateDon(@Parameter(name = "id", description = "the don id to updated") @PathVariable("id") Long id, @RequestBody DonDTO donDTO) {
@@ -64,7 +68,7 @@ public class DonController {
         }
     }
 
-    @Operation(summary = "Read all Budget", description = "It takes input param of the page and returns this list related")
+    @Operation(summary = "Get all dons", description = "Get all dons with pagination and search parameters")
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
@@ -75,6 +79,8 @@ public class DonController {
     }
 
 
+    @Operation(summary = "Get dons by donneur", description = "Get all dons for a specific donneur")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "400", description = "Request sent by the client was syntactically incorrect"), @ApiResponse(responseCode = "404", description = "Resource not found"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @GetMapping("/donneur/{donneurId}")
     @ResponseStatus(HttpStatus.OK)
     public Response<Object> getDonsByDonneur(@PathVariable Long donneurId) {
@@ -86,6 +92,8 @@ public class DonController {
         }
     }
 
+    @Operation(summary = "Check donation eligibility", description = "Check if a donneur is eligible for donation")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "400", description = "Request sent by the client was syntactically incorrect"), @ApiResponse(responseCode = "404", description = "Resource not found"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @GetMapping("/eligibility/{donneurId}")
     @ResponseStatus(HttpStatus.OK)
     public Response<Object> checkEligibility(@PathVariable Long donneurId) {
@@ -105,11 +113,11 @@ public class DonController {
         }
     }
 
-    @Operation(summary = "don the agent", description = "Delete don, it takes input id don")
+    @Operation(summary = "Delete don", description = "Delete don, it takes input id don")
     @ApiResponses(value = {@ApiResponse(responseCode = "204", description = "No content"), @ApiResponse(responseCode = "400", description = "Request sent by the client was syntactically incorrect"), @ApiResponse(responseCode = "404", description = "Resource access does not exist"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAgent(@PathVariable("id") Long id) {
+    public void deleteDon(@PathVariable("id") Long id) {
         try {
             donService.deleteDon(id);
         } catch (Exception e) {

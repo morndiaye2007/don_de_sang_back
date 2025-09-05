@@ -7,13 +7,13 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", uses = {DonMapper.class})
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", uses = {DonMapper.class, MedecinMapper.class, HopitalMapper.class})
 public abstract class DemandeMapper implements EntityMapper<DemandeDTO, DemandeEntity> {
     @Override
     @Mapping(source = "stockSangId", target = "stockSang.id")
     @Mapping(source = "centreCollecteId", target = "centreCollecte.id")
     @Mapping(source = "hopitalId", target = "hopital.id")
-
+    @Mapping(source = "medecinId", target = "medecin.id")
 
     public abstract  DemandeEntity asEntity(DemandeDTO dto);
 
@@ -21,6 +21,7 @@ public abstract class DemandeMapper implements EntityMapper<DemandeDTO, DemandeE
     @Mapping(source = "hopital.id", target = "hopitalId")
     @Mapping(source = "stockSang.id", target = "stockSangId")
     @Mapping(source = "centreCollecte.id", target = "centreCollecteId")
+    @Mapping(source = "medecin.id", target = "medecinId")
 
     public abstract DemandeDTO asDto(DemandeEntity entity);
 

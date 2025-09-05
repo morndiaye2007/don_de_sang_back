@@ -16,4 +16,5 @@ public interface DonneurService {
     DonneurDTO getDonneur(Long id);
      Page<DonneurDTO> getAllDonneurs(Map<String, String> searchParams, Pageable pageable);
      Response<Object> authenticateDonneur(String telephone, String motDePasse);
+     void updateFcmToken(Long donneurId, String fcmToken);
 }

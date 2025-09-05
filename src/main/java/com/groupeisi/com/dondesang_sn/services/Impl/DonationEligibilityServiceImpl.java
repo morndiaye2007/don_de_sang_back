@@ -28,7 +28,7 @@ public class DonationEligibilityServiceImpl implements DonationEligibilityServic
             // Récupérer le dernier don effectué du donneur
             var dons = donRepository.findByDonneurId(donneurId);
             var lastDonation = dons.stream()
-                .filter(don -> don.getStatutDon() == StatusDon.EFFECTUE)
+                .filter(don -> don.getStatutDon() == StatusDon.EFFECTUE || don.getStatutDon() == StatusDon.EFFECTUE)
                 .max((d1, d2) -> d1.getDateDon().compareTo(d2.getDateDon()));
 
             if (lastDonation.isEmpty()) {
@@ -56,7 +56,7 @@ public class DonationEligibilityServiceImpl implements DonationEligibilityServic
 
             var dons = donRepository.findByDonneurId(donneurId);
             var lastDonation = dons.stream()
-                .filter(don -> don.getStatutDon() == StatusDon.EFFECTUE)
+                .filter(don -> don.getStatutDon() == StatusDon.EFFECTUE || don.getStatutDon() == StatusDon.EFFECTUE)
                 .max((d1, d2) -> d1.getDateDon().compareTo(d2.getDateDon()));
 
             if (lastDonation.isEmpty()) {

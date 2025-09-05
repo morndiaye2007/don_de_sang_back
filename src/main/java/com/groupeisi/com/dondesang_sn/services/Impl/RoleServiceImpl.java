@@ -1,5 +1,6 @@
 package com.groupeisi.com.dondesang_sn.services.Impl;
 
+import com.groupeisi.com.dondesang_sn.entity.QRoleEntity;
 import com.groupeisi.com.dondesang_sn.mapper.CampagneMapper;
 import com.groupeisi.com.dondesang_sn.mapper.RoleMapper;
 import com.groupeisi.com.dondesang_sn.models.CampagneDTO;
@@ -7,7 +8,6 @@ import com.groupeisi.com.dondesang_sn.models.RoleDTO;
 import com.groupeisi.com.dondesang_sn.repository.CampagneRepository;
 import com.groupeisi.com.dondesang_sn.repository.RoleRepository;
 import com.groupeisi.com.dondesang_sn.services.CampagneService;
-import com.groupeisi.com.dondesang_sn.entity.QRoleEntity;
 
 import com.groupeisi.com.dondesang_sn.services.RoleService;
 import com.querydsl.core.BooleanBuilder;

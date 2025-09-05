@@ -31,6 +31,8 @@ public class DemandeDTO implements Serializable {
     private double nombreDepoche;
   //  private HopitalDTO hopital;
     private Long hopitalId;
+    private Long medecinId;
+    private MedecinDTO medecin;
   //  private StockSangDTO stockSang;
     private Long stockSangId;
   //  private CentreCollecteDTO centreCollecte;

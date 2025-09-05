@@ -7,10 +7,10 @@ import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
-public abstract class CNTSMapper implements EntityMapper<CNTSDTO, CNTSEntity> {
+public interface CNTSMapper extends EntityMapper<CNTSDTO, CNTSEntity> {
     @Override
-    public abstract CNTSEntity asEntity(CNTSDTO dto);
+    CNTSEntity asEntity(CNTSDTO dto);
 
     @Override
-    public abstract CNTSDTO asDto(CNTSEntity entity);
+    CNTSDTO asDto(CNTSEntity entity);
 }

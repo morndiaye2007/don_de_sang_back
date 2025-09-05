@@ -1,5 +1,6 @@
 package com.groupeisi.com.dondesang_sn.services;
 
+import com.groupeisi.com.dondesang_sn.entity.enums.TypeGroupeSanguin;
 import com.groupeisi.com.dondesang_sn.models.StockSangDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,4 +13,6 @@ public interface StockSangService {
     void deleteStockSang(Long id);
     StockSangDTO getStockSang(Long id);
     Page<StockSangDTO> getAllStockSangs(Map<String, String> searchParams, Pageable pageable);
+    void incrementerStock(TypeGroupeSanguin groupeSanguin, Double nombrePoches, Long centreCollecteId);
+    Map<String, Object> getStockStatistiquesByGroupeSanguin();
 }

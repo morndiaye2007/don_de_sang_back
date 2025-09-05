@@ -24,6 +24,9 @@ public class SmsServiceImpl implements SmsService {
     @Value("${sms.enabled:false}")
     private boolean smsEnabled;
 
+    @Value("${sms.test.mode:false}")
+    private boolean testMode;
+
     private boolean twilioInitialized = false;
 
     private void initializeTwilio() {
@@ -43,6 +46,22 @@ public class SmsServiceImpl implements SmsService {
         if (!smsEnabled) {
             log.info("SMS disabled - would send confirmation to {}: RDV confirmé pour {} le {} à {} au centre {}", 
                 phoneNumber, donorName, appointmentDate, appointmentTime, centerName);
+            return;
+        }
+
+        // Mode test : simuler l'envoi sans utiliser Twilio
+        if (testMode) {
+            String messageBody = String.format(
+                "Bonjour %s,\n\nVotre rendez-vous de don de sang est confirmé :\n" +
+                "📅 Date : %s\n" +
+                "🕐 Heure : %s\n" +
+                "🏥 Centre : %s\n\n" +
+                "Merci pour votre générosité !\n" +
+                "Don de Sang Sénégal",
+                donorName, appointmentDate, appointmentTime, centerName
+            );
+            
+            log.info("MODE TEST - SMS de confirmation simulé envoyé à {} :\n{}", phoneNumber, messageBody);
             return;
         }
 
@@ -87,6 +106,19 @@ public class SmsServiceImpl implements SmsService {
             return;
         }
 
+        // Mode test : simuler l'envoi sans utiliser Twilio
+        if (testMode) {
+            String statusMessage = getStatusMessage(status);
+            String messageBody = String.format(
+                "Bonjour %s,\n\n%s pour votre rendez-vous du %s.\n\n" +
+                "Don de Sang Sénégal",
+                donorName, statusMessage, appointmentDate
+            );
+            
+            log.info("MODE TEST - SMS de mise à jour de statut simulé envoyé à {} :\n{}", phoneNumber, messageBody);
+            return;
+        }
+
         initializeTwilio();
         
         if (!twilioInitialized) {
@@ -124,6 +156,41 @@ public class SmsServiceImpl implements SmsService {
                 return "❌ Votre rendez-vous a été refusé. Veuillez reprendre contact avec nous";
             default:
                 return "📋 Statut de votre rendez-vous mis à jour : " + status;
+        }
+    }
+
+    @Override
+    public void sendSms(String phoneNumber, String message) {
+        if (!smsEnabled) {
+            log.info("SMS disabled - would send to {}: {}", phoneNumber, message);
+            return;
+        }
+
+        // Mode test : simuler l'envoi sans utiliser Twilio
+        if (testMode) {
+            log.info("MODE TEST - SMS simulé envoyé à {} :\n{}", phoneNumber, message);
+            return;
+        }
+
+        initializeTwilio();
+        
+        if (!twilioInitialized) {
+            log.warn("Twilio not initialized - SMS not sent to {}", phoneNumber);
+            return;
+        }
+
+        try {
+            String formattedPhone = formatSenegalPhoneNumber(phoneNumber);
+
+            Message twilioMessage = Message.creator(
+                new PhoneNumber(formattedPhone),
+                new PhoneNumber(fromPhoneNumber),
+                message
+            ).create();
+
+            log.info("SMS sent successfully to {} with SID: {}", formattedPhone, twilioMessage.getSid());
+        } catch (Exception e) {
+            log.error("Failed to send SMS to {}", phoneNumber, e);
         }
     }
 

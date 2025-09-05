@@ -12,6 +12,7 @@ import java.util.Map;
 @Service
 public interface DonService {
     DonDTO createDon(DonDTO donDTO);
+    DonDTO createDonFromRdv(Long rdvId);
     DonDTO updateDon(DonDTO donDTO);
     void deleteDon(Long id);
     DonDTO getDon(Long id);

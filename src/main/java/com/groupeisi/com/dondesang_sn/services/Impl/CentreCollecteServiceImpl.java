@@ -1,11 +1,11 @@
 package com.groupeisi.com.dondesang_sn.services.Impl;
 
+import com.groupeisi.com.dondesang_sn.entity.QCentreCollecteEntity;
 import com.groupeisi.com.dondesang_sn.mapper.CentreCollecteMapper;
 import com.groupeisi.com.dondesang_sn.models.CentreCollecteDTO;
 import com.groupeisi.com.dondesang_sn.repository.CentreCollecteRepository;
 import com.groupeisi.com.dondesang_sn.services.CentreCollecteService;
 import com.querydsl.core.BooleanBuilder;
-import com.groupeisi.com.dondesang_sn.entity.QCentreCollecteEntity;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

@@ -25,7 +25,7 @@ public class DemandeEntity implements Serializable {
     private Date dateDemande;
 
     @Column(name = "nombre_de_poche", nullable = false)
-    private double nombreDepoche;
+    private int nombreDepoche;
     @Enumerated(EnumType.STRING)
     @Column(name = "statut_demande")
     private StatutDemande statutDemande;
@@ -37,6 +37,10 @@ public class DemandeEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hopital_id", nullable = true)
     private HopitalEntity hopital;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "medecin_id", nullable = true)
+    private MedecinEntity medecin;
 
     @ManyToOne
     @JoinColumn(name = "stock_id")

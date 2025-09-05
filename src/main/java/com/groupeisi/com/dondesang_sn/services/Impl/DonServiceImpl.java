@@ -1,13 +1,13 @@
 package com.groupeisi.com.dondesang_sn.services.Impl;
 
+import com.groupeisi.com.dondesang_sn.entity.DonsEntity;
+import com.groupeisi.com.dondesang_sn.entity.enums.StatusDon;
 import com.groupeisi.com.dondesang_sn.mapper.DonMapper;
 import com.groupeisi.com.dondesang_sn.models.DonDTO;
 import com.groupeisi.com.dondesang_sn.models.DonneurDTO;
 import com.groupeisi.com.dondesang_sn.repository.DonRepository;
+import com.groupeisi.com.dondesang_sn.repository.RdvRepository;
 import com.groupeisi.com.dondesang_sn.services.DonService;
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.groupeisi.com.dondesang_sn.entity.QDonsEntity;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,12 +31,29 @@ public class DonServiceImpl implements DonService {
 
     private final DonRepository donRepository;
     private final DonMapper donMapper;
+    private final RdvRepository rdvRepository;
 
     @Override
     public DonDTO createDon(DonDTO donDTO) {
         var entity = donMapper.asEntity(donDTO);
         var entitySave = donRepository.save(entity);
         return donMapper.asDto(entitySave);
+    }
+
+    @Override
+    public DonDTO createDonFromRdv(Long rdvId) {
+        var rdv = rdvRepository.findById(rdvId)
+                .orElseThrow(() -> new RuntimeException("RDV non trouvé"));
+        
+        var don = new DonsEntity();
+        don.setDateDon(new Date());
+        don.setNombrePoche(1.0); // 1 poche par don standard
+        don.setStatutDon(StatusDon.EFFECTUE);
+        don.setDonneur(rdv.getDonneur());
+        don.setCampagne(rdv.getCampagne());
+        
+        var savedEntity = donRepository.save(don);
+        return donMapper.asDto(savedEntity);
     }
 
     @Override
@@ -62,43 +79,9 @@ public class DonServiceImpl implements DonService {
 
     @Override
     public Page<DonDTO> getAllDons(Map<String, String> searchParams, Pageable pageable) {
-        var booleanBuilder = new BooleanBuilder();
-        buildSearch(searchParams, booleanBuilder);
-        return donRepository.findAll(booleanBuilder, pageable)
+        // Utilisation de requêtes JPA standard au lieu de QueryDSL
+        return donRepository.findAll(pageable)
                 .map(donMapper::asDto);
-    }
-
-
-    private void buildSearch(Map<String, String> searchParams, BooleanBuilder booleanBuilder) {
-        if (Objects.nonNull(searchParams)) {
-            var qEntity = QDonsEntity.donsEntity;
-
-            if (searchParams.containsKey("dateDon")){
-                Date date = null;
-                try {
-                    date = new SimpleDateFormat("yyyy-MM-dd").parse(searchParams.get("dateDon"));
-                } catch (ParseException e) {
-                    throw new RuntimeException(e);
-                }
-                booleanBuilder.and(qEntity.dateDon.eq(date));
-            }
-
-            String statutDon = searchParams.get("statutDon");
-            if (statutDon != null && !statutDon.isEmpty()) {
-                booleanBuilder.and(qEntity.statutDon.stringValue().lower().containsIgnoreCase(statutDon.toLowerCase()));
-            }
-        }
-    }
-
-    private void addDatePredicate(Map<String, String> params, String key, BooleanBuilder builder, Function<Date, BooleanExpression> expressionFunction) {
-        if (params.containsKey(key)) {
-            try {
-                Date date = new SimpleDateFormat("yyyy-MM-dd").parse(params.get(key));
-                builder.and(expressionFunction.apply(date));
-            } catch (ParseException e) {
-                throw new RuntimeException("Erreur lors du parsing de la date pour la clé: " + key, e);
-            }
-        }
     }
 
     @Override

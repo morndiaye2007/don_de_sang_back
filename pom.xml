@@ -163,6 +163,13 @@
             <artifactId>twilio</artifactId>
             <version>9.14.1</version>
         </dependency>
+
+        <!-- Firebase Admin SDK pour notifications push -->
+        <dependency>
+            <groupId>com.google.firebase</groupId>
+            <artifactId>firebase-admin</artifactId>
+            <version>9.2.0</version>
+        </dependency>
     </dependencies>
 
     <build>

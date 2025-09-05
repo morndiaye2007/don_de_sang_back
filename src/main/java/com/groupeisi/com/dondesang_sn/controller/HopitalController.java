@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import java.util.Map;
 @RequestMapping("hopitals")
 @RequiredArgsConstructor
 @CrossOrigin("*")
+@Tag(name = "Hôpitaux", description = "API pour la gestion des hôpitaux")
 public class HopitalController {
     private final HopitalService hopitalService;
 
@@ -35,6 +37,8 @@ public class HopitalController {
         }
     }
 
+    @Operation(summary = "Update hôpital", description = "Update an existing hôpital")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "400", description = "Request sent by the client was syntactically incorrect"), @ApiResponse(responseCode = "404", description = "Resource not found"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Response<Object> updateHopital(@Parameter(name = "id", description = "the hopitals id to updated") @PathVariable("id") Long id, @RequestBody HopitalDTO hopitalDTO) {
@@ -60,7 +64,7 @@ public class HopitalController {
         }
     }
 
-    @Operation(summary = "Read all Budget", description = "It takes input param of the page and returns this list related")
+    @Operation(summary = "Get all hôpitaux", description = "Get all hôpitaux with pagination and search parameters")
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)

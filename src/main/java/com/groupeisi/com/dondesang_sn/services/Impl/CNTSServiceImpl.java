@@ -1,14 +1,15 @@
 package com.groupeisi.com.dondesang_sn.services.Impl;
 
+import com.groupeisi.com.dondesang_sn.entity.QCNTSEntity;
 import com.groupeisi.com.dondesang_sn.mapper.CNTSMapper;
 import com.groupeisi.com.dondesang_sn.models.CNTSDTO;
 import com.groupeisi.com.dondesang_sn.repository.CNTSRepository;
 import com.groupeisi.com.dondesang_sn.services.CNTSService;
-import com.groupeisi.com.dondesang_sn.entity.QCNTSEntity;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,15 @@ import java.util.Objects;
 import java.util.function.Function;
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class CNTSServiceImpl implements CNTSService {
 
     private final CNTSRepository cntsRepository;
     private final CNTSMapper cntsMapper;
+
+    public CNTSServiceImpl(CNTSRepository cntsRepository, @Qualifier("CNTSMapperImpl") CNTSMapper cntsMapper) {
+        this.cntsRepository = cntsRepository;
+        this.cntsMapper = cntsMapper;
+    }
 
 
     private void buildSearch(Map<String, String> searchParams, BooleanBuilder booleanBuilder) {

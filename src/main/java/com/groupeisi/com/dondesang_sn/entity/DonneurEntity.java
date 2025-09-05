@@ -45,6 +45,9 @@ public class DonneurEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dateDernierDon;
 
+    @Column(name = "fcm_token", nullable = true)
+    private String fcmToken;
+
     @ManyToOne
     @JoinColumn(name = "campagne_id", nullable = true)
     private CampagneEntity campagne;

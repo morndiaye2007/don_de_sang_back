@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import java.util.Map;
 @RequestMapping("/campagnes")
 @RequiredArgsConstructor
 @CrossOrigin("*")
+@Tag(name = "Campagnes", description = "API pour la gestion des campagnes de don")
 public class CampagneController {
 
     private final CampagneService campagneService;
@@ -51,6 +53,8 @@ public class CampagneController {
         }
     }
 
+    @Operation(summary = "Update campagne", description = "Update an existing campagne")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "400", description = "Request sent by the client was syntactically incorrect"), @ApiResponse(responseCode = "404", description = "Resource not found"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Response<Object> updateCampagne(@Parameter(name = "id", description = "the campagnes id to updated") @PathVariable("id") Long id, @RequestBody CampagneDTO campagneDTO) {
@@ -77,7 +81,7 @@ public class CampagneController {
         }
     }
 
-    @Operation(summary = "Read all Budget", description = "It takes input param of the page and returns this list related")
+    @Operation(summary = "Get all campagnes", description = "Get all campagnes with pagination and search parameters")
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
@@ -88,7 +92,7 @@ public class CampagneController {
     }
 
 
-    @Operation(summary = "create the campagnes", description = "Delete campagnes, it takes input id campagnes")
+    @Operation(summary = "Delete campagne", description = "Delete campagne, it takes input id campagnes")
     @ApiResponses(value = {@ApiResponse(responseCode = "204", description = "No content"), @ApiResponse(responseCode = "400", description = "Request sent by the client was syntactically incorrect"), @ApiResponse(responseCode = "404", description = "Resource access does not exist"), @ApiResponse(responseCode = "500", description = "Internal server error during request processing")})
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

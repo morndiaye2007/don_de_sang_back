@@ -115,4 +115,13 @@ public class DonneurServiceImpl implements DonneurService {
         }
     }
 
+    @Override
+    public void updateFcmToken(Long donneurId, String fcmToken) {
+        var donneur = donneurRepository.findById(donneurId)
+            .orElseThrow(() -> new RuntimeException("Donneur non trouvé"));
+        
+        donneur.setFcmToken(fcmToken);
+        donneurRepository.save(donneur);
+    }
+
 }

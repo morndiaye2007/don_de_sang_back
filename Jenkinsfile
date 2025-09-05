@@ -50,18 +50,15 @@ pipeline {
             }
         }
         
-        stage('Quality Analysis') {
-            steps {
-                echo 'Analyse de la qualité du code...'
-                script {
-                    try {
-                        bat 'mvn sonar:sonar'
-                    } catch (Exception e) {
-                        echo 'SonarQube analysis failed, continuing...'
-                    }
-                }
-            }
-        }
+      stage('Quality Analysis') {
+          steps {
+              echo 'Analyse du code avec SonarCloud...'
+              withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
+                  bat "mvn -B verify sonar:sonar -Dsonar.login=%SONAR_TOKEN%"
+              }
+          }
+      }
+
         
         stage('Docker Build') {
             steps {
